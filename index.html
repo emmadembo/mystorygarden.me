@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Story Garden — Event Venue & Plant Studio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#">The Story Garden</a>
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#spaces">Spaces</a>
+        <a href="#book">Book</a>
+        <a href="#contact" class="btn-outline">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <h1>Host your story in a living space</h1>
+          <p class="lead">
+            An elegant, plant-filled venue for workshops, product shoots, intimate gatherings, and creative events. Natural light, curated greenery, and effortless service.
+          </p>
+          <p class="meta">
+            Seats up to <strong>60</strong> • In-house plant styling • Catering-friendly
+          </p>
+          <div class="hero-cta">
+            <a href="#book" class="btn-primary">Check availability</a>
+            <a href="#spaces" class="btn-link">View spaces</a>
+          </div>
+        </div>
+
+        <figure class="hero-photo" aria-hidden="true">
+          <!-- Placeholder image; replace with real photography -->
+          <div class="photo-placeholder">Photo</div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section container">
+      <div class="split">
+        <div>
+          <h2>What we offer</h2>
+          <ul class="features">
+            <li>Beautiful plant installations & seasonal styling</li>
+            <li>Flexible layouts for meetings, classes, and private events</li>
+            <li>Audio/visual setup, catering partnerships, on-site coordinator</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Perfect for</h3>
+          <p>Creative professionals, product shoots, workshops, intimate weddings, brand activations, and photoshoots.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spaces -->
+    <section id="spaces" class="section container">
+      <h2>Spaces & pricing</h2>
+      <div class="cards">
+        <article class="card">
+          <h4>Greenroom (Main)</h4>
+          <p class="price">$350/hr</p>
+          <p class="desc">Sunlit central room with 40–60 seating, mobile greenhouse wall, and AV hookups.</p>
+          <a class="card-cta" href="#book">Book Greenroom</a>
+        </article>
+
+        <article class="card">
+          <h4>Studio Nook</h4>
+          <p class="price">$150/hr</p>
+          <p class="desc">Cozy space for headshots, meetings, and small workshops (up to 12).</p>
+          <a class="card-cta" href="#book">Book Studio Nook</a>
+        </article>
+
+        <article class="card">
+          <h4>Courtyard</h4>
+          <p class="price">$250/hr</p>
+          <p class="desc">Outdoor-inspired courtyard with potted trees — great for receptions and cocktails.</p>
+          <a class="card-cta" href="#book">Book Courtyard</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Quick booking -->
+    <section id="book" class="section booking">
+      <div class="container booking-inner">
+        <div>
+          <h2>Quick inquiry</h2>
+          <p>Tell us your date, headcount, and a short note — we’ll reply within 24 hours.</p>
+        </div>
+
+        <form class="inquiry-form" action="#" method="post" onsubmit="alert('Form demo — replace action with your booking backend'); return false;">
+          <label>
+            Full name
+            <input type="text" name="name" required />
+          </label>
+
+          <label>
+            Email
+            <input type="email" name="email" required />
+          </label>
+
+          <label>
+            Preferred date
+            <input type="date" name="date" required />
+          </label>
+
+          <label>
+            Guests
+            <input type="number" name="guests" min="1" max="500" value="20" />
+          </label>
+
+          <label>
+            Message
+            <textarea name="message" placeholder="Tell us about your event"></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">Send inquiry</button>
+            <a href="#contact" class="btn-link">Contact coordinator</a>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section container contact">
+      <div class="split">
+        <div>
+          <h3>Visit or say hello</h3>
+          <p><strong>Address:</strong> 123 Green Lane, Dallas, TX</p>
+          <p><strong>Phone:</strong> (555) 555-5555</p>
+          <p><strong>Email:</strong> events@thestorygarden.example</p>
+        </div>
+        <div>
+          <h3>Social</h3>
+          <p>Follow for behind-the-scenes styling and availability updates.</p>
+          <div class="social">
+            <a href="#" aria-label="Instagram">Instagram</a>
+            <a href="#" aria-label="Pinterest">Pinterest</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> The Story Garden — Plant venue & studio</p>
+    </div>
+  </footer>
+
+  <script>
+    // small niceties
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
