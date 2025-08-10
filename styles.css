@@ -1,0 +1,186 @@
+:root{
+  --bg: #fcfbf9;
+  --card: #ffffff;
+  --muted: #6b6b6b;
+  --accent: #2f855a;
+  --accent-2: #22543d;
+  --shadow: 0 8px 24px rgba(17,17,17,0.08);
+  --radius: 12px;
+  --container: 1100px;
+  --gap: 1.25rem;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color-scheme: light;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:#14202b;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+
+.container{
+  width:94%;
+  max-width:var(--container);
+  margin:0 auto;
+  padding:2rem 0;
+}
+
+/* Header */
+.site-header{
+  background:transparent;
+  position:sticky;
+  top:0;
+  z-index:40;
+  backdrop-filter: blur(6px);
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:1rem 0;
+}
+.logo{
+  font-weight:700;
+  letter-spacing:0.2px;
+  text-decoration:none;
+  color:#0b3b2e;
+  font-size:1.1rem;
+}
+.nav a{
+  margin-left:1rem;
+  text-decoration:none;
+  color:var(--muted);
+  font-weight:600;
+}
+.nav a:hover{color:var(--accent-2)}
+.btn-outline{
+  padding:0.5rem 0.75rem;
+  border-radius:8px;
+  border:1px solid rgba(34,84,61,0.08);
+  background:transparent;
+}
+
+/* Hero */
+.hero{
+  padding:3rem 0;
+  background:linear-gradient(180deg, rgba(47,133,90,0.03), transparent 60%);
+  border-bottom:1px solid rgba(17,17,17,0.03);
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns: 1fr 420px;
+  gap:var(--gap);
+  align-items:center;
+}
+.hero-text h1{
+  margin:0 0 .5rem 0;
+  font-size:2.2rem;
+  line-height:1.05;
+  color:#0b3b2e;
+}
+.lead{color:var(--muted); margin:0.6rem 0 1rem 0}
+.meta{color:#3a4940; font-size:0.95rem}
+.hero-cta{display:flex; gap:0.75rem; margin-top:1rem}
+.btn-primary{
+  background:var(--accent);
+  color:white;
+  padding:0.75rem 1rem;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:700;
+  box-shadow: 0 6px 18px rgba(34,84,61,0.12);
+}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-link{
+  align-self:center;
+  text-decoration:underline;
+  color:var(--accent-2);
+  background:transparent;
+  border:none;
+  padding:0.5rem 0.75rem;
+}
+
+/* Photo placeholder */
+.hero-photo .photo-placeholder{
+  height:320px;
+  border-radius:var(--radius);
+  background:linear-gradient(135deg,#e9f7ef,#f0fff6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--accent-2);
+  font-weight:700;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(34,84,61,0.06);
+}
+
+/* Sections */
+.section{ padding:2rem 0; }
+.split{ display:flex; gap:2rem; align-items:flex-start; flex-wrap:wrap}
+
+/* Features */
+.features{ list-style:disc; margin:0.5rem 0 0 1.25rem; color:var(--muted)}
+
+/* Cards */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+  margin-top:1rem;
+}
+.card{
+  background:var(--card);
+  border-radius:14px;
+  padding:1rem;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(3,10,10,0.03);
+}
+.card h4{ margin:0 0 0.5rem 0 }
+.price{ color:var(--accent-2); font-weight:800; margin:0.25rem 0 0.5rem 0}
+.card-cta{
+  display:inline-block;
+  margin-top:0.75rem;
+  text-decoration:none;
+  color:var(--accent);
+  font-weight:700;
+}
+
+/* Booking form */
+.booking{ background:linear-gradient(180deg, rgba(0,0,0,0.02), transparent); border-top:1px solid rgba(0,0,0,0.03)}
+.booking-inner{
+  display:flex;
+  gap:2rem;
+  align-items:flex-start;
+  flex-wrap:wrap;
+}
+.inquiry-form{
+  background:var(--card);
+  padding:1rem;
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(3,10,10,0.03);
+  min-width:300px;
+  flex:1;
+  display:grid;
+  gap:0.6rem;
+}
+.inquiry-form label{ font-size:0.9rem; color:#243234; display:block }
+.inquiry-form input,
+.inquiry-form textarea{
+  width:100%;
+  padding:0.6rem;
+  border-radius:8px;
+  border:1px solid rgba(3,10,10,0.06);
+  font-size:0.95rem;
+}
+.inquiry-form textarea{ min-height:100px; resize:vertical}
+.form-actions{ display:flex; gap:0.6rem; align-items:center }
+
+/* Contact social */
+.social a{ margin-right:0.6rem; text-de
