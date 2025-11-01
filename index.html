@@ -15,8 +15,8 @@
     <div class="container header-inner">
       <a class="logo" href="#">The Story Garden</a>
       <nav class="nav">
-        <a href="#about">About</a>
-        <a href="#Shop">Shop</a>
+        <a href="#about" aria-label="About section" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'}); return false;">About</a>
+        <a href="#Shop" aria-label="Shop section" onclick="document.getElementById('Shop').scrollIntoView({behavior: 'smooth'}); return false;">Shop</a>
        <!-- CONTACT BUTTON HEADER -->
        <!-- <a href="#book" class="btn-outline">Contact</a> -->
       </nav>
@@ -29,7 +29,9 @@
       <div class="container hero-grid">
         <div class="hero-text">
           <h1>The Story Garden</h1>
-          <h2>Grow your story. Sustainably. Beautifully.</h2> 
+          <h2 style="font-size:clamp(1rem,4vw,2rem); line-height:1.05; margin:0 0 1rem;">
+            Grow your story. Sustainably. Beautifully.
+          </h2>
           <p class="lead">
             Our compact hydroponic systems lets you cultivate thriving plants anywhere,
              with style and purpose.
@@ -54,23 +56,38 @@
     <section id="about" class="section container">
       <div class="split">
         <div>
-          <h2>About</h2>
-          <p>The Story Garden creates systems and spaces that make sustainable growing both practical and visually refined. We combine horticultural science with intentional design to help people grow more efficiently, beautifully, and responsibly.
+          <h2 style="font-size:3rem; line-height:1.1; margin-bottom:1rem; text-align:right;">About</h2>
+          <ul class="about-grid" style="list-style:none;margin:0rem;padding:1rem;display:flex;gap:1rem;align-items:center;">
+            <li class="about-photo" style="flex:1;">
+              <div class="photo-container" style="width:100%;max-width:420px;margin:0 auto;">
+                <!-- 3D STL viewer 
+                <div id="stl-viewer" style="width:100%;height:420px;border-radius:8px;overflow:hidden;background:#be5d5d;position:relative;"></div>
+              </div>
+            </li>-->
+                <img src="Product Market place staging.png" alt="System Design With Plants" style="width: 100%; max-width: 400px; height: auto; display: block; margin: 0 auto;">
+        </figure>
+            <li class="about-text" style="flex:1;">
+              <p>The Story Garden creates systems and spaces that make sustainable growing both practical and visually refined. We combine horticultural science with intentional design to help people grow more efficiently, beautifully, and responsibly.</p>
 
-Our work spans from innovative hydroponic systems like Eden to thoughtfully designed green environments that support learning, creativity, and connection.
+              <p>Our work spans from innovative hydroponic systems like Eden to thoughtfully designed green environments that support learning, creativity, and connection.</p>
 
-At its core, The Story Garden is about integrating nature into everyday life — with methods that are smart, sustainable, and built to last.</p>
+              <p>At its core, The Story Garden is about integrating nature into everyday life — with methods that are smart, sustainable, and built to last.</p>
+            </li></li>
           </ul>
         </div>
         <div>
-         
     </section>
 
     <!-- Shop -->
     <section id="Shop" class="section container">
-      <h2>Shop</h2>
-      <div class="cards">
-         <p>Available for Preorder November 15th</p>
+      <h2 style="font-size: 2.5rem; line-height: 1.1; margin-bottom: 3rem;">Shop</h2>
+      <div class="cards" style="font-size: 1rem;">
+        <p style="margin: 0; font-size: 1.5rem; line-height: 1.2; font-weight: 600;">
+          The Eden System will be Available for Preorder — November 15th</p>
+          <div style="height:clamp(2rem,6vw,6rem);"></div>
+          <p  style="margin: 2rem 0; font-size: 1.2rem; line-height: 1.4;">
+
+      </div>
       <!--    <article class="card">
           <h4>Greenroom (Main)</h4>
           <p class="price">$350/hr</p>
