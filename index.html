@@ -1,18 +1,5 @@
 <!doctype html>
-<html lang="en" class="no-js" dir="ltr" data-theme="light">
-<script>
-  // quick progressive enhancement: remove no-js and expose safe-area vars for iOS
-  (function(){
-    document.documentElement.classList.remove('no-js');
-    try {
-      const root = document.documentElement;
-      root.style.setProperty('--safe-area-top', 'env(safe-area-inset-top, 0px)');
-      root.style.setProperty('--safe-area-bottom', 'env(safe-area-inset-bottom, 0px)');
-      root.style.setProperty('--safe-area-left', 'env(safe-area-inset-left, 0px)');
-      root.style.setProperty('--safe-area-right', 'env(safe-area-inset-right, 0px)');
-    } catch (e) {}
-  })();
-</script>
+<html lang="en">
 <head>
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,200;1,200&family=Questrial&display=swap');
@@ -30,7 +17,7 @@
 </head>
 
 <body>
-  <header class="site-header" style="position:sticky; top:0; left:0; right:0; z-index:9999; background:#fff; box-shadow:0 2px 6px rgba(0,0,0,0.08);">
+  <header class="site-header">
   <script>
   (function(){
     const header = document.querySelector('.site-header');
@@ -106,26 +93,10 @@
 
         <figure class="hero-photo" aria-hidden="true">
 
-    <style>
-      /* Make all images scale to their container on all devices */
-      img, picture img, figure img, .photo-container img {
-      display: block;
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-      object-fit: cover; /* keeps aspect while filling container */
-      box-sizing: border-box;
-      }
-      /* Ensure containers do not force overflow on small screens */
-      .hero-photo, figure, .photo-container {
-      max-width: 100%;
-      box-sizing: border-box;
-      }
-    </style>
-
     <!-- Placeholder image; replace with real photography -->
-        <img src="System Design With Plants.png" alt="System Design With Plants" style="width:100%;max-width:100%;height:auto;display:block;margin:0 auto;object-fit:cover;">
-      </figure>
+          <img src="System Design With Plants.png" alt="System Design With Plants"
+            style="width:100%; max-width:400px; max-height:60vh; height:auto; display:block; margin:0 auto; border-radius:0 !important; object-fit:contain;">
+        </figure>
       </div>
     </section>
 
@@ -191,7 +162,7 @@
     <section id="Contact" class="section booking">
       <div class="container booking-inner">
         <div>
-          <h2 style="font-size: clamp(1.75rem, 4.5vw, 3rem); line-height: 1.05; margin: 0 0 1rem;">Get in Touch!</h2>
+          <h2>Get in Touch!</h2>
           <p>Questions about our system or wholesale inquiries?</p>
           <p>Send us a message and we’ll be in touch soon.</p>
         </div>
@@ -202,7 +173,7 @@
         -->
         <form id="inquiry-form" class="inquiry-form" novalidate>
           <fieldset>
-            <legend>Contact Information (required)</legend>
+            <legend>Customer (required)</legend>
 
             <label>
               Full name
