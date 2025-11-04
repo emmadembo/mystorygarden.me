@@ -1,6 +1,43 @@
 <!doctype html>
+
+<html lang="en">
+<head>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,200;1,200&family=Questrial&display=swap');
+</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Story Garden —</title>
+  <style>
+
+  /* Remove the box/shadow around the logo link (and suppress tap highlight) */
+  .logo,
+  .logo:link,
+  .logo:visited,
+  .logo:focus,
+  .logo:hover,
+  .logo:active {
+    background: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+  </style>
+
+  <!-- Favicon / App Icons -->
+  <link rel="icon" href="SG Initial Logo.png" type="image/png" sizes="any">
+  <link rel="apple-touch-icon" href="SG Initial Logo.png">
+  <link rel="shortcut icon" href="SG Initial Logo.png">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
 <style>
+/* OVERALL SITE STYLES FOR TEXT WRAPPING, IMAGES, AND RESPONSIVENESS */
+
 /* Prevent mid-word breaks while keeping natural wrapping and hyphenation */
+
 body, p, h1, h2, h3, h4, h5, a, label, li {
   word-break: normal;        /* don't forcibly break words */
   overflow-wrap: normal;     /* prefer natural break points (spaces/hyphens) */
@@ -47,37 +84,7 @@ h1, h2, p, .lead {
   overflow-wrap: normal;
 }
 </style>
-<html lang="en">
-<head>
-  <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,200;1,200&family=Questrial&display=swap');
-</style>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Story Garden —</title>
-  <style>
-  /* Remove the box/shadow around the logo link (and suppress tap highlight) */
-  .logo,
-  .logo:link,
-  .logo:visited,
-  .logo:focus,
-  .logo:hover,
-  .logo:active {
-    background: transparent !important;
-    box-shadow: none !important;
-    outline: none !important;
-    border: none !important;
-    -webkit-tap-highlight-color: transparent;
-  }
-  </style>
 
-  <!-- Favicon / app icons -->
-  <link rel="icon" href="SG Initial Logo.png" type="image/png" sizes="any">
-  <link rel="apple-touch-icon" href="SG Initial Logo.png">
-  <link rel="shortcut icon" href="SG Initial Logo.png">
-
-  <link rel="stylesheet" href="styles.css" />
-</head>
 
 <body>
   <header class="site-header">
@@ -92,6 +99,7 @@ h1, h2, p, .lead {
       const top = window.pageYOffset + rect.top - headerOffset();
       window.scrollTo({ top, behavior: 'smooth' });
     }
+
 // SCROLLING
     // Intercept same-page anchor clicks and apply offset scroll
     document.addEventListener('click', function(e){
@@ -117,18 +125,68 @@ h1, h2, p, .lead {
     applyScrollPadding();
   })();
   </script>
-    <div class="container header-inner">
-      <a class="logo" href="#">The Story Garden</a>
-      <nav class="nav">
-         <!-- ABOUT BUTTON HEADER -->
-        <a href="#about" aria-label="About section" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'}); return false;">About</a>
-        <!-- SHOP BUTTON HEADER -->
-        <a href="#Shop" aria-label="Shop section" onclick="document.getElementById('Shop').scrollIntoView({behavior: 'smooth'}); return false;">Shop</a>
-       <!-- CONTACT BUTTON HEADER -->
+  <style>
+    /* Header: keep logo + nav on one line and scale to fit small screens */
+    .container.header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+      padding: .5rem 1rem;
+      box-sizing: border-box;
+    }
+
+    .container.header-inner .logo {
+      font-family: inherit;
+      font-weight: 600;
+      font-size: clamp(.95rem, 4.5vw, 1.2rem);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 48%;
+      flex: 0 1 auto;
+    }
+
+    .container.header-inner .nav {
+      display: flex;
+      gap: .4rem;
+      align-items: center;
+      justify-content: flex-end;
+      flex: 1 1 auto;
+      flex-wrap: nowrap; /* prevent wrapping to a new line */
+      overflow: hidden;  /* clip overflowing items */
+    }
+
+    .container.header-inner .nav a {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;           /* allow flex children to shrink */
+      flex: 0 1 auto;         /* allow shrinking but not forcing full width */
+      font-size: clamp(.78rem, 3.6vw, .95rem);
+      padding: .35rem .6rem;
+    }
+
+    /* Tighten spacing and type on very small screens so everything fits on one line */
+    @media (max-width: 420px) {
+      .container.header-inner { padding: .35rem .5rem; gap: .35rem; }
+      .container.header-inner .logo { max-width: 40%; font-size: clamp(.8rem, 5.2vw, .98rem); }
+      .container.header-inner .nav a { font-size: clamp(.68rem, 4.4vw, .88rem); padding: .25rem .45rem; }
+    }
+  </style>
+
+  <div class="container header-inner">
+    <a class="logo" href="#" title="The Story Garden">The Story Garden</a>
+    <nav class="nav" aria-label="Main navigation">
+      <!-- ABOUT BUTTON HEADER -->
+      <a href="#about" aria-label="About section" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'}); return false;">About</a>
+      <!-- SHOP BUTTON HEADER -->
+      <a href="#Shop" aria-label="Shop section" onclick="document.getElementById('Shop').scrollIntoView({behavior: 'smooth'}); return false;">Shop</a>
+      <!-- CONTACT BUTTON HEADER -->
       <a href="#Contact" class="btn-outline" aria-label="Contact section" onclick="document.getElementById('Contact').scrollIntoView({behavior: 'smooth'}); return false;">Get in touch</a>
-      </nav>
-    </div>
-  </header>
+    </nav>
+  </div>
+</header>
 
   <main>
     <style>
