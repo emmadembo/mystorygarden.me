@@ -9,7 +9,8 @@
   --radius: 12px;
 
   /* Layout / spacing */
-  --container: 1100px;      /* desktop max */
+  /* make the container fluid by default but cap at a sensible desktop max */
+  --container: clamp(680px, 92vw, 1100px);
   --gap: 1.25rem;
 
   /* Touch / accessibility */
@@ -24,18 +25,42 @@
   --font-size-base: clamp(14px, 1.8vw, 18px);
   --h1-size: clamp(2rem, 5.5vw, 4.75rem);
   --lead-size: clamp(1rem, 2.2vw, 1.25rem);
+  --line-height-base: 1.45;
 
   /* Constrain hero/photo sizing responsively */
   --hero-photo-min: 200px;
   --hero-photo-max: 420px;
   --hero-photo-width: clamp(var(--hero-photo-min), 30vw, var(--hero-photo-max));
 
-  /* Container responsive cap (keeps proportions on very large screens) */
-  --container-responsive: clamp(680px, 92vw, var(--container));
-
   /* Interaction tweaks */
   --tap-highlight: transparent;
   --focus-outline: 3px solid rgba(198,180,153,0.25);
+}
+
+/* Base responsive helpers to ensure text & media reflow on small screens */
+html { font-size: var(--font-size-base); -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+:root, body { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+/* Ensure text wraps cleanly on narrow viewports */
+p, li, a, span, h1, h2, h3, h4, h5, h6 {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* Make images and media fluid so they never overflow their containers */
+img, picture, video, svg {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Utility to keep long inline elements from causing horizontal scroll */
+.container, .header-inner, .hero-text, .split, .cards, .booking-inner, .inquiry-form {
+  min-width: 0; /* allows flex/grid children to shrink properly */
 }
 
 /* Base / Mobile-first */
