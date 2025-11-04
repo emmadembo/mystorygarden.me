@@ -7,6 +7,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>The Story Garden — </title>
+
+  <!-- Favicon / app icons -->
+  <link rel="icon" href="SG Initial Logo.png" type="image/png" sizes="any">
+  <link rel="apple-touch-icon" href="SG Initial Logo.png">
+  <link rel="shortcut icon" href="SG Initial Logo.png">
+
   <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -23,7 +29,7 @@
       const top = window.pageYOffset + rect.top - headerOffset();
       window.scrollTo({ top, behavior: 'smooth' });
     }
-
+// SCROLLING
     // Intercept same-page anchor clicks and apply offset scroll
     document.addEventListener('click', function(e){
       const a = e.target.closest('a[href^="#"]');
@@ -66,16 +72,19 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-text">
+    <!-- TITLE -->
           <h1>The Story Garden</h1>
           <h2 style="font-size:clamp(1rem,4vw,2rem); line-height:1.05; margin:0 0 1rem;">
             Grow your story. Sustainably. Beautifully.
           </h2>
+    <!-- SUBTEXT TO TITLE -->
           <p class="lead">
             Our compact hydroponic systems lets you cultivate thriving plants anywhere,
              with style and purpose.
           </p>
           <p class="meta">
           </p>
+    <!-- BUTTONS -->
           <div class="hero-cta">
             <a href="#Shop" class="btn-primary">Shop</a>
             <a href="#Contact" class="btn-link">Contact</a>
@@ -84,7 +93,7 @@
 
         <figure class="hero-photo" aria-hidden="true">
 
-          <!-- Placeholder image; replace with real photography -->
+    <!-- Placeholder image; replace with real photography -->
           <img src="System Design With Plants.png" alt="System Design With Plants" style="width: 100%; max-width: 400px; height: auto; display: block; margin: 0 auto;">
         </figure>
       </div>
@@ -98,7 +107,7 @@
         <ul class="about-grid" style="list-style:none;margin:0rem;padding:1rem;display:flex;gap:1rem;align-items:center;">
           <li class="about-photo" style="flex:1;">
             <div class="photo-container" style="width:100%;max-width:420px;margin:0 auto;">
-              <!-- Placeholder image; replace with real photography or 3D viewer -->
+      <!-- Placeholder image; replace with real photography or 3D viewer -->
               <img src="Product Market place staging.png" alt="System Design With Plants" style="width: 100%; max-width: 400px; height: auto; display: block; margin: 0 auto;">
             </div>
           </li>
@@ -148,7 +157,7 @@
       </div>-->
     </section>
 
-    <!-- Contact -->
+  <!-- Contact -->
     <section id="Contact" class="section booking">
       <div class="container booking-inner">
         <div>
@@ -157,9 +166,9 @@
           <p>Send us a message and we’ll be in touch soon.</p>
         </div>
 
-        <!--
-          FORM POSTS JSON to /api/send-email (server). The recipient email is kept on the server
-          and can be changed in the server's environment variables (see server.js/.env below).
+  <!--
+  FORM POSTS JSON to /api/send-email (server). The recipient email is kept on the server
+  and can be changed in the server's environment variables (see server.js/.env below).
         -->
         <form id="inquiry-form" class="inquiry-form" novalidate>
           <label>
@@ -215,7 +224,8 @@
         <div id="inquiry-feedback" aria-live="polite" style="margin-top:1rem;"></div>
 
         <script>
-            // Client: submit form JSON to Formspree. Replace <YOUR_FORM_ID> with your actual Formspree form ID.
+  // FORM SUBMISSION HANDLING
+  // Client: submit form JSON to Formspree. Replace <YOUR_FORM_ID> with your actual Formspree form ID.
             const SEND_ENDPOINT = 'https://formspree.io/f/mqagvyaq';
             const FALLBACK_EMAIL = 'you@example.com'; // replace with your inbox for mailto fallback
             const FALLBACK_DISPLAY = 'Contact Story Garden';
@@ -237,7 +247,7 @@
             feedbackMessage('', '');
 
             try {
-              // Use AbortController for a simple timeout
+    // Use AbortController for a simple timeout
               const controller = new AbortController();
               const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
 
@@ -256,24 +266,24 @@
           throw new Error('Server responded with ' + res.status + (details ? ': ' + details : ''));
               }
 
-              // replace feedbackMessage with inline thank-you h2 in same style as page h2
+          // replace feedbackMessage with inline thank-you h2 in same style as page h2
               const form = document.getElementById('inquiry-form');
-              // replace feedbackMessage with inline thank-you h2 in same style as page h2
+          // replace feedbackMessage with inline thank-you h2 in same style as page h2
                             const container = form.parentNode;
                 const section = document.getElementById('Contact') || form.closest('.booking') || form.closest('section');
-                // prefer a paragraph in the same section for "section text" font; fall back to first h2/p
+          // prefer a paragraph in the same section for "section text" font; fall back to first h2/p
                 const refText = section ? section.querySelector('p') : document.querySelector('p') || document.querySelector('h2');
                 const refStyle = refText ? window.getComputedStyle(refText) : null;
 
-                // create a container (this will be the node that replaces the form)
+          // create a container (this will be the node that replaces the form)
                 const rect = form.getBoundingClientRect();
                 const thank = document.createElement('div');
                 thank.setAttribute('role', 'status');
                 thank.setAttribute('aria-live', 'polite');
 
-                // Preserve the form's size/shape so replacing it doesn't change layout
-                // ensure the preserved frame expands to fill the available horizontal space,
-                // while allowing the inner text to wrap responsively on small devices
+            // Preserve the form's size/shape so replacing it doesn't change layout
+            // ensure the preserved frame expands to fill the available horizontal space,
+            // while allowing the inner text to wrap responsively on small devices
                 thank.style.minWidth = '100%';
                 thank.style.width = '100%';
                 thank.style.maxWidth = '100%';
@@ -284,35 +294,35 @@
                 thank.style.minHeight = rect.height + 'px';
                 thank.style.boxSizing = 'border-box';
 
-                // Center the message inside the preserved frame
+            // Center the message inside the preserved frame
                 thank.style.display = 'flex';
                 thank.style.alignItems = 'center';
                 thank.style.justifyContent = 'center';
                 thank.style.textAlign = 'center';
 
-                // create the visible message inside the container
+            // create the visible message inside the container
                 const msg = document.createElement('h2');
                 msg.textContent = "Thanks — we'll be in touch soon!";
                 msg.style.margin = '0'; // keep spacing neat inside the form frame
                 thank.appendChild(msg);
 
-                // copy the form's visual frame (background, border, padding, etc.) onto the wrapper
+            // copy the form's visual frame (background, border, padding, etc.) onto the wrapper
                 const formStyle = window.getComputedStyle(form);
                 if (formStyle.backgroundColor) thank.style.background = formStyle.backgroundColor;
                 if (formStyle.border) thank.style.border = formStyle.border;
                 if (formStyle.borderRadius) thank.style.borderRadius = formStyle.borderRadius;
                 if (formStyle.boxShadow) thank.style.boxShadow = formStyle.boxShadow;
-                // preserve padding/layout so the message sits inside the same "outline"
+            // preserve padding/layout so the message sits inside the same "outline"
                 thank.style.paddingTop = formStyle.paddingTop;
                 thank.style.paddingRight = formStyle.paddingRight;
                 thank.style.paddingBottom = formStyle.paddingBottom;
                 thank.style.paddingLeft = formStyle.paddingLeft;
                 thank.style.boxSizing = 'border-box';
-                // keep the same display so layout doesn't jump
+            // keep the same display so layout doesn't jump
                 thank.style.display = formStyle.display || 'block';
                 thank.style.width = formStyle.width && formStyle.width !== 'auto' ? formStyle.width : '100%';
 
-              // copy common font-related styles if available
+          // copy common font-related styles if available
               if (refStyle) {
                 thank.style.fontFamily = refStyle.fontFamily;
                 thank.style.fontSize = refStyle.fontSize;
@@ -322,13 +332,13 @@
                 thank.style.textAlign = refStyle.textAlign;
               }
 
-              // replace the form with the thank you message
+          // replace the form with the thank you message
               container.replaceChild(thank, form);
               form.reset();
             } catch (err) {
               console.error('Send error:', err);
 
-              // Mailto fallback: open user's email client with a prefilled message
+          // Mailto fallback: open user's email client with a prefilled message
               try {
           const subject = `Inquiry from ${data.name || 'website'}`;
           const bodyLines = [
@@ -348,7 +358,7 @@
             + '&body=' + encodeURIComponent(body);
 
           feedbackMessage('Could not send via server — opening your email client as a fallback.', 'crimson');
-          // Open mail client; user will need to send the email manually
+      // Open mail client; user will need to send the email manually
           window.location.href = mailto;
               } catch (mailtoErr) {
           console.error('Fallback mailto error:', mailtoErr);
