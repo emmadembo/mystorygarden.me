@@ -293,11 +293,63 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   :root{ --tap-size:48px; }
 }
 
-/* iOS-specific tweaks */
+/* iOS-specific tweaks: make mobile/iOS match desktop layout */
 @supports (-webkit-overflow-scrolling: touch) {
   /* ensure header doesn't overlap content on notch devices */
   .site-header { padding-bottom: 0.25rem; }
   .header-inner { -webkit-touch-callout: none; }
+
+  /* Force desktop-style layout on iOS devices so mobile matches desktop */
+  .container {
+    width:92%;
+    max-width:var(--container);
+    margin:0 auto;
+    padding:2rem 0;
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+  }
+
+  .hero {
+    padding:6rem 0;
+    background:linear-gradient(180deg, rgba(47,133,90,0.03), transparent 60%);
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr 420px;
+    gap:var(--gap);
+    align-items:center;
+  }
+
+  .hero-text h1 {
+    font-size:4.75rem;
+    line-height:1.05;
+    max-width:900px;
+    margin:0 0 .6rem 0;
+    word-break:break-word;
+  }
+
+  .lead { font-size:1.25rem; }
+
+  .hero-photo .photo-placeholder { height:320px; }
+
+  .cards { grid-template-columns: repeat(3,1fr); gap:1rem; }
+
+  .split { gap:6rem; margin-top:3rem; align-items:flex-start; }
+
+  .booking-inner { gap:2rem; }
+
+  /* keep touch targets comfortable on iOS */
+  :root { --tap-size:48px; }
+
+  /* ensure sticky header/backdrop behaves consistently */
+  .site-header {
+    position:sticky;
+    top:0;
+    z-index:40;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+}
 }
 
 /* Backdrop-filter support fallback: keep original look if not supported */
