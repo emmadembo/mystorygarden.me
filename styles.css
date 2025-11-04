@@ -25,19 +25,55 @@
 
   /* Fluid typography (mobile-first) — tuned so text scales with viewport width
      while avoiding excessive wrapping on narrow portrait screens. */
-  --font-size-base: clamp(12px, 4.0vw, 18px);
-  --h1-size: clamp(1.2rem, 8.5vw, 3.2rem);
-  --lead-size: clamp(.95rem, 3.8vw, 1.15rem);
-  --line-height-base: 1.4;
+  --font-size-base: clamp(13px, 3.6vw, 18px);
+  --h1-size: clamp(1.4rem, 6.8vw, 3.6rem);
+  --lead-size: clamp(.98rem, 3.2vw, 1.15rem);
+  --line-height-base: 1.45;
 
-  /* Hero/photo sizing */
+  /* Hero/photo sizing - wider on small devices but capped to desktop max */
   --hero-photo-min: 120px;
   --hero-photo-max: 420px;
-  --hero-photo-width: clamp(var(--hero-photo-min), 80vw, var(--hero-photo-max));
+  --hero-photo-width: clamp(var(--hero-photo-min), 40vw, var(--hero-photo-max));
 
   /* Interaction */
   --tap-highlight: transparent;
   --focus-outline: 3px solid rgba(198,180,153,0.25);
+}
+
+/* Ensure the root font-size tracks the variable (stronger than later rules) */
+html { font-size: var(--font-size-base) !important; }
+
+/* Prevent mid-word breaks while allowing natural line wrapping */
+p, li, a, span, h1, h2, h3, h4, h5, h6 {
+  word-break: normal !important;        /* do not break words mid-word */
+  overflow-wrap: break-word !important;/* allow wrapping at sensible points */
+  hyphens: auto !important;            /* enable hyphenation where available */
+}
+
+/* Force images and hero containers to scale fluidly (stronger than later defaults) */
+img, picture, video, svg,
+.hero-photo img, .hero-photo picture, .hero-photo video {
+  max-width: 100% !important;
+  width: 100% !important;    /* let media fill their container responsively */
+  height: auto !important;
+  display: block !important;
+  object-fit: contain !important;
+}
+
+/* Ensure the hero placeholder sizes from the variable and never overflows */
+.hero-photo .photo-placeholder {
+  width: var(--hero-photo-width) !important;
+  max-width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 4/3;
+  overflow: hidden !important;
+  display: block !important;
+}
+
+/* Keep container sizing fluid so text + images match desktop proportions on small screens */
+.container {
+  max-width: var(--container) !important;
+  width: clamp(92%, 92vw, var(--container)) !important;
 }
 
 /* Portrait phone tuning: scale text down smoothly, reduce headings to avoid forced wrapping */
@@ -96,7 +132,7 @@
   :root{
     --container: 94%;
     --gap: 0.75rem;
-    --font-size-base: clamp(13px, 3.6vw, 16px);
+    --font-size-base: clamp(11px, 4.0vw, 16px);
     --h1-size: clamp(1.4rem, 7.5vw, 2.2rem);
     --lead-size: clamp(.95rem, 3.5vw, 1.05rem);
     --hero-photo-min: 140px;
@@ -110,7 +146,7 @@
 /* Extra-tight portrait phones: keep headline & images comfortably sized and prevent overflow */
 @media (max-width: 420px) and (orientation: portrait) {
   :root{
-    --container: 96%;
+    --container: clamp(280px, 92%, 420px);
     --gap: 0.5rem;
     --font-size-base: clamp(13px, 4.2vw, 15px);
     --h1-size: clamp(1.25rem, 8.5vw, 1.9rem);

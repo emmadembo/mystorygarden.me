@@ -6,7 +6,22 @@
 </style>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Story Garden — </title>
+  <title>The Story Garden —</title>
+  <style>
+  /* Remove the box/shadow around the logo link (and suppress tap highlight) */
+  .logo,
+  .logo:link,
+  .logo:visited,
+  .logo:focus,
+  .logo:hover,
+  .logo:active {
+    background: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+  </style>
 
   <!-- Favicon / app icons -->
   <link rel="icon" href="SG Initial Logo.png" type="image/png" sizes="any">
@@ -95,6 +110,9 @@
 
     <!-- Placeholder image; replace with real photography -->
           <img src="System Design With Plants.png" alt="System Design With Plants"
+            srcset="System Design With Plants.png 1x, System Design With Plants@2x.png 2x"
+            sizes="(max-width:480px) 92vw, (orientation:portrait) 92vw, 400px"
+            loading="lazy" decoding="async"
             style="width:100%; max-width:400px; max-height:60vh; height:auto; display:block; margin:0 auto; border-radius:0 !important; object-fit:contain;">
         </figure>
       </div>
