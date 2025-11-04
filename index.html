@@ -161,7 +161,7 @@
     <section id="Contact" class="section booking">
       <div class="container booking-inner">
         <div>
-          <h2>Get in Touch!</h2>
+          <h2 style="font-size: clamp(1.75rem, 4.5vw, 3rem); line-height: 1.05; margin: 0 0 1rem;">Get in Touch!</h2>
           <p>Questions about our system or wholesale inquiries?</p>
           <p>Send us a message and we’ll be in touch soon.</p>
         </div>
@@ -171,45 +171,56 @@
   and can be changed in the server's environment variables (see server.js/.env below).
         -->
         <form id="inquiry-form" class="inquiry-form" novalidate>
-          <label>
-            Full name
-            <input type="text" name="name" required />
-          </label>
+          <fieldset>
+            <legend>Contact Information (required)</legend>
 
-          <label>
-            Email
-            <input type="email" name="email" required />
-          </label>
+            <label>
+              Full name
+              <input type="text" name="name" required />
+            </label>
 
-          <label>
-            Company / Business (optional)
-            <input type="text" name="company" placeholder="Your business or organization name" />
-          </label>
+            <label>
+              Email
+              <input type="email" name="email" required />
+            </label>
 
-          <label>
-            Inquiry type
-            <select name="inquiry_type" required>
-              <option value="">Select…</option>
-              <option value="general">General question</option>
-              <option value="system">Product demo / System inquiry</option>
-              <option value="wholesale">Wholesale / Partnership</option>
-            </select>
-          </label>
+            <label>
+              Inquiry type
+              <select name="inquiry_type" required>
+                <option value="">Select…</option>
+                <option value="general">General question</option>
+                <option value="system">Product demo / System inquiry</option>
+                <option value="wholesale">Wholesale / Partnership</option>
+              </select>
+            </label>
+          </fieldset>
 
-          <label>
-            Product of interest (optional)
-            <input type="text" name="product" placeholder="e.g. The Eden System, components, wholesale program" />
-          </label>
+          <fieldset>
+            <legend>Business (optional)</legend>
+            <p style="margin:0 0 .5rem; font-size:.95rem; color:#555;">
+              Fill this section if you're contacting on behalf of a business or for wholesale/partnerships.
+            </p>
 
-          <label>
-            Preferred date (optional)
-            <input type="date" name="date" />
-          </label>
+            <label>
+              Company / Business (optional)
+              <input type="text" name="company" placeholder="Your business or organization name" />
+            </label>
 
-          <label>
-            Estimated quantity (for wholesale, optional)
-            <input type="number" name="quantity" min="1" max="10000" />
-          </label>
+            <label>
+              Estimated quantity (for wholesale, optional)
+              <input type="number" name="quantity" min="1" max="10000" />
+            </label>
+
+            <label>
+              Product of interest (optional)
+              <input type="text" name="product" placeholder="e.g. The Eden System, components, wholesale program" />
+            </label>
+
+            <label>
+              Preferred date (optional)
+              <input type="date" name="date" />
+            </label>
+          </fieldset>
 
           <label>
             Message
@@ -217,7 +228,7 @@
           </label>
 
           <div class="form-actions">
-            <button type="submit" class="btn-primary">Send inquiry</button>
+            <button type="submit" class="btn-primary" style="border: none !important; box-shadow: none !important; outline: none !important;">Send inquiry</button>
           </div>
         </form>
 
