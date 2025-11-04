@@ -12,13 +12,51 @@
 
 <body>
   <header class="site-header">
+  <script>
+  (function(){
+    const header = document.querySelector('.site-header');
+    function headerOffset(){ return (header ? header.offsetHeight : 0) + 12; } // extra gap so section text isn't hidden
+
+    function scrollToElementWithOffset(el){
+      if(!el) return;
+      const rect = el.getBoundingClientRect();
+      const top = window.pageYOffset + rect.top - headerOffset();
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+
+    // Intercept same-page anchor clicks and apply offset scroll
+    document.addEventListener('click', function(e){
+      const a = e.target.closest('a[href^="#"]');
+      if(!a) return;
+      const href = a.getAttribute('href');
+      if(!href || href === '#') return;
+      const id = href.slice(1);
+      const target = document.getElementById(id);
+      if(target){
+        e.preventDefault();
+        scrollToElementWithOffset(target);
+        // update the URL hash without jumping
+        history.replaceState(null, '', '#' + id);
+      }
+    });
+
+ // Also set CSS scroll-padding-top for browsers that use it (helps native fragment navigation)
+    function applyScrollPadding(){
+      document.documentElement.style.scrollPaddingTop = headerOffset() + 'px';
+    }
+    window.addEventListener('resize', applyScrollPadding);
+    applyScrollPadding();
+  })();
+  </script>
     <div class="container header-inner">
       <a class="logo" href="#">The Story Garden</a>
       <nav class="nav">
+         <!-- ABOUT BUTTON HEADER -->
         <a href="#about" aria-label="About section" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'}); return false;">About</a>
+        <!-- SHOP BUTTON HEADER -->
         <a href="#Shop" aria-label="Shop section" onclick="document.getElementById('Shop').scrollIntoView({behavior: 'smooth'}); return false;">Shop</a>
        <!-- CONTACT BUTTON HEADER -->
-       <!-- <a href="#book" class="btn-outline">Contact</a> -->
+      <a href="#Contact" class="btn-outline" aria-label="Contact section" onclick="document.getElementById('Contact').scrollIntoView({behavior: 'smooth'}); return false;">Get in touch</a>
       </nav>
     </div>
   </header>
@@ -40,7 +78,7 @@
           </p>
           <div class="hero-cta">
             <a href="#Shop" class="btn-primary">Shop</a>
-             <!--  <a href="#book" class="btn-link">Contact</a>-->
+            <a href="#Contact" class="btn-link">Contact</a>
           </div>
         </div>
 
@@ -88,7 +126,8 @@
           <p  style="margin: 2rem 0; font-size: 1.2rem; line-height: 1.4;">
 
       </div>
-      <!--    <article class="card">
+      <!-- Cards   
+       <article class="card">
           <h4>Greenroom (Main)</h4>
           <p class="price">$350/hr</p>
           <p class="desc">Sunlit central room with 40–60 seating, mobile greenhouse wall, and AV hookups.</p>
@@ -111,15 +150,20 @@
       </div>-->
     </section>
 
-    <!-- BOOK -->
-   <!-- <section id="book" class="section booking">
+    <!-- Contact -->
+    <section id="Contact" class="section booking">
       <div class="container booking-inner">
         <div>
-          <h2>Book</h2>
-          <p>Tell us your date, headcount, and a short note — we’ll reply within 24 hours.</p>
+          <h2>Get in Touch!</h2>
+          <p>Questions about our system or wholesale inquiries?</p>
+          <p>Send us a message and we’ll be in touch soon.</p>
         </div>
 
-        <form class="inquiry-form" action="#" method="post" onsubmit="alert('Form demo — replace action with your booking backend'); return false;">
+        <!--
+          FORM POSTS JSON to /api/send-email (server). The recipient email is kept on the server
+          and can be changed in the server's environment variables (see server.js/.env below).
+        -->
+        <form id="inquiry-form" class="inquiry-form" novalidate>
           <label>
             Full name
             <input type="text" name="name" required />
@@ -131,27 +175,88 @@
           </label>
 
           <label>
-            Preferred date
-            <input type="date" name="date" required />
+            Company / Business (optional)
+            <input type="text" name="company" placeholder="Your business or organization name" />
           </label>
 
           <label>
-            Guests
-            <input type="number" name="guests" min="1" max="500" value="20" />
+            Inquiry type
+            <select name="inquiry_type" required>
+              <option value="">Select…</option>
+              <option value="general">General question</option>
+              <option value="system">Product demo / System inquiry</option>
+              <option value="wholesale">Wholesale / Partnership</option>
+            </select>
+          </label>
+
+          <label>
+            Product of interest (optional)
+            <input type="text" name="product" placeholder="e.g. The Eden System, components, wholesale program" />
+          </label>
+
+          <label>
+            Preferred date (optional)
+            <input type="date" name="date" />
+          </label>
+
+          <label>
+            Estimated quantity (for wholesale, optional)
+            <input type="number" name="quantity" min="1" max="10000" />
           </label>
 
           <label>
             Message
-            <textarea name="message" placeholder="Tell us about your event"></textarea>
+            <textarea name="message" placeholder="Tell us your story!"></textarea>
           </label>
 
           <div class="form-actions">
             <button type="submit" class="btn-primary">Send inquiry</button>
-            <a href="#contact" class="btn-link">Contact coordinator</a>
           </div>
         </form>
+
+        <div id="inquiry-feedback" aria-live="polite" style="margin-top:1rem;"></div>
+
+        <script>
+          // Client: submit form JSON to backend endpoint. Change endpoint if needed.
+          // endpoint can be changed here if you host server at a different path/origin.
+          const SEND_ENDPOINT = '/api/send-email'; // <-- change this if your server route differs
+
+          document.getElementById('inquiry-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const data = Object.fromEntries(new FormData(form).entries());
+            const btn = form.querySelector('button[type="submit"]');
+            const feedback = document.getElementById('inquiry-feedback');
+
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+            feedback.textContent = '';
+
+            try {
+              const res = await fetch(SEND_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+              });
+
+              if (!res.ok) throw new Error('Network response was not ok');
+
+              feedback.style.color = 'green';
+              feedback.textContent = 'Thanks — we\'ll be in touch soon.';
+              form.reset();
+            } catch (err) {
+              console.error(err);
+              feedback.style.color = 'crimson';
+              feedback.textContent = 'There was an error sending your message. Please try again later.';
+            } finally {
+              btn.disabled = false;
+              btn.textContent = 'Send inquiry';
+            }
+          });
+        </script>
       </div>
-    </section>-->
+    </section>
+    </section>
 
     <!-- Contact -->
    <!-- <section id="contact" class="section container contact">
