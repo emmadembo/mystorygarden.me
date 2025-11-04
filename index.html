@@ -106,9 +106,26 @@
 
         <figure class="hero-photo" aria-hidden="true">
 
+    <style>
+      /* Make all images scale to their container on all devices */
+      img, picture img, figure img, .photo-container img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      object-fit: cover; /* keeps aspect while filling container */
+      box-sizing: border-box;
+      }
+      /* Ensure containers do not force overflow on small screens */
+      .hero-photo, figure, .photo-container {
+      max-width: 100%;
+      box-sizing: border-box;
+      }
+    </style>
+
     <!-- Placeholder image; replace with real photography -->
-          <img src="System Design With Plants.png" alt="System Design With Plants" style="width: 100%; max-width: 400px; height: auto; display: block; margin: 0 auto;">
-        </figure>
+        <img src="System Design With Plants.png" alt="System Design With Plants" style="width:100%;max-width:100%;height:auto;display:block;margin:0 auto;object-fit:cover;">
+      </figure>
       </div>
     </section>
 
