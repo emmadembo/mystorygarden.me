@@ -90,6 +90,78 @@ body{
   transition: background 160ms ease, box-shadow 160ms ease;
 }
 
+/* Improve wrapping & image resizing for small portrait iPhones */
+@media (max-width:420px) and (orientation:portrait) {
+  .site-header {
+    /* give a little extra breathing room for notch + comfortable tap area */
+    padding-top: calc(env(safe-area-inset-top, 0) + 6px);
+    padding-bottom: 6px;
+  }
+
+  /* allow header content to wrap and compress gracefully */
+  .header-inner {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  /* reduce logo size and allow it to wrap */
+  .logo {
+    font-size: 1.15rem;
+    max-width: 60%;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  /* make nav flow to a new line and keep touch targets readable */
+  .nav {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 0.4rem;
+  }
+  .nav a {
+    margin-left: 0.4rem;
+    font-size: 0.95rem;
+    padding: 0.3rem 0.5rem;
+    min-height: 44px;
+    white-space: normal;
+    line-height: 1.2;
+  }
+
+  /* ensure hero text wraps and scales down on small portrait screens */
+  .hero-text h1 {
+    font-size: clamp(1.4rem, 7.5vw, 2.2rem);
+    line-height: 1.08;
+    white-space: normal;
+    word-break: break-word;
+    max-width: 100%;
+  }
+  .lead { font-size: clamp(.95rem, 3.5vw, 1.05rem); }
+
+  /* force hero/photo to stack and images to resize nicely */
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-photo .photo-placeholder,
+  .hero-photo img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 50vh;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  /* generally ensure images scale down to viewport */
+  img, video, .hero-photo img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
 :root {
   /* make in-page anchor clicks (like the logo) scroll smoothly */
   scroll-behavior: smooth;
