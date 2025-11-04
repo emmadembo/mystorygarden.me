@@ -95,23 +95,21 @@
       <div class="split">
         <div>
           <h2 style="font-size:3rem; line-height:1.1; margin-bottom:1rem; text-align:right;">About</h2>
-          <ul class="about-grid" style="list-style:none;margin:0rem;padding:1rem;display:flex;gap:1rem;align-items:center;">
-            <li class="about-photo" style="flex:1;">
-              <div class="photo-container" style="width:100%;max-width:420px;margin:0 auto;">
-                <!-- 3D STL viewer 
-                <div id="stl-viewer" style="width:100%;height:420px;border-radius:8px;overflow:hidden;background:#be5d5d;position:relative;"></div>
-              </div>
-            </li>-->
-                <img src="Product Market place staging.png" alt="System Design With Plants" style="width: 100%; max-width: 400px; height: auto; display: block; margin: 0 auto;">
-        </figure>
-            <li class="about-text" style="flex:1;">
-              <p>The Story Garden creates systems and spaces that make sustainable growing both practical and visually refined. We combine horticultural science with intentional design to help people grow more efficiently, beautifully, and responsibly.</p>
+        <ul class="about-grid" style="list-style:none;margin:0rem;padding:1rem;display:flex;gap:1rem;align-items:center;">
+          <li class="about-photo" style="flex:1;">
+            <div class="photo-container" style="width:100%;max-width:420px;margin:0 auto;">
+              <!-- Placeholder image; replace with real photography or 3D viewer -->
+              <img src="Product Market place staging.png" alt="System Design With Plants" style="width: 100%; max-width: 400px; height: auto; display: block; margin: 0 auto;">
+            </div>
+          </li>
+          <li class="about-text" style="flex:1;">
+            <p>The Story Garden creates systems and spaces that make sustainable growing both practical and visually refined. We combine horticultural science with intentional design to help people grow more efficiently, beautifully, and responsibly.</p>
 
-              <p>Our work spans from innovative hydroponic systems like Eden to thoughtfully designed green environments that support learning, creativity, and connection.</p>
+            <p>Our work spans from innovative hydroponic systems like Eden to thoughtfully designed green environments that support learning, creativity, and connection.</p>
 
-              <p>At its core, The Story Garden is about integrating nature into everyday life — with methods that are smart, sustainable, and built to last.</p>
-            </li></li>
-          </ul>
+            <p>At its core, The Story Garden is about integrating nature into everyday life — with methods that are smart, sustainable, and built to last.</p>
+          </li>
+        </ul>
         </div>
         <div>
     </section>
@@ -217,37 +215,145 @@
         <div id="inquiry-feedback" aria-live="polite" style="margin-top:1rem;"></div>
 
         <script>
-          // Client: submit form JSON to backend endpoint. Change endpoint if needed.
-          // endpoint can be changed here if you host server at a different path/origin.
-          const SEND_ENDPOINT = '/api/send-email'; // <-- change this if your server route differs
+            // Client: submit form JSON to Formspree. Replace <YOUR_FORM_ID> with your actual Formspree form ID.
+            const SEND_ENDPOINT = 'https://formspree.io/f/mqagvyaq';
+            const FALLBACK_EMAIL = 'you@example.com'; // replace with your inbox for mailto fallback
+            const FALLBACK_DISPLAY = 'Contact Story Garden';
 
-          document.getElementById('inquiry-form').addEventListener('submit', async (e) => {
+            function feedbackMessage(text, color = '') {
+            const el = document.getElementById('inquiry-feedback');
+            el.style.color = color;
+            el.textContent = text;
+            }
+
+            document.getElementById('inquiry-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const form = e.target;
             const data = Object.fromEntries(new FormData(form).entries());
             const btn = form.querySelector('button[type="submit"]');
-            const feedback = document.getElementById('inquiry-feedback');
 
             btn.disabled = true;
             btn.textContent = 'Sending…';
-            feedback.textContent = '';
+            feedbackMessage('', '');
 
             try {
+              // Use AbortController for a simple timeout
+              const controller = new AbortController();
+              const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+
               const res = await fetch(SEND_ENDPOINT, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+          signal: controller.signal
               });
 
-              if (!res.ok) throw new Error('Network response was not ok');
+              clearTimeout(timeoutId);
 
-              feedback.style.color = 'green';
-              feedback.textContent = 'Thanks — we\'ll be in touch soon.';
+              if (!res.ok) {
+          let details = '';
+          try { details = await res.text(); } catch (_) {}
+          throw new Error('Server responded with ' + res.status + (details ? ': ' + details : ''));
+              }
+
+              // replace feedbackMessage with inline thank-you h2 in same style as page h2
+              const form = document.getElementById('inquiry-form');
+              // replace feedbackMessage with inline thank-you h2 in same style as page h2
+                            const container = form.parentNode;
+                const section = document.getElementById('Contact') || form.closest('.booking') || form.closest('section');
+                // prefer a paragraph in the same section for "section text" font; fall back to first h2/p
+                const refText = section ? section.querySelector('p') : document.querySelector('p') || document.querySelector('h2');
+                const refStyle = refText ? window.getComputedStyle(refText) : null;
+
+                // create a container (this will be the node that replaces the form)
+                const rect = form.getBoundingClientRect();
+                const thank = document.createElement('div');
+                thank.setAttribute('role', 'status');
+                thank.setAttribute('aria-live', 'polite');
+
+                // Preserve the form's size/shape so replacing it doesn't change layout
+                // ensure the preserved frame expands to fill the available horizontal space,
+                // while allowing the inner text to wrap responsively on small devices
+                thank.style.minWidth = '100%';
+                thank.style.width = '100%';
+                thank.style.maxWidth = '100%';
+                thank.style.boxSizing = 'border-box';
+                thank.style.whiteSpace = 'normal';
+                thank.style.wordBreak = 'break-word';
+                thank.style.wordWrap = 'break-word';
+                thank.style.minHeight = rect.height + 'px';
+                thank.style.boxSizing = 'border-box';
+
+                // Center the message inside the preserved frame
+                thank.style.display = 'flex';
+                thank.style.alignItems = 'center';
+                thank.style.justifyContent = 'center';
+                thank.style.textAlign = 'center';
+
+                // create the visible message inside the container
+                const msg = document.createElement('h2');
+                msg.textContent = "Thanks — we'll be in touch soon!";
+                msg.style.margin = '0'; // keep spacing neat inside the form frame
+                thank.appendChild(msg);
+
+                // copy the form's visual frame (background, border, padding, etc.) onto the wrapper
+                const formStyle = window.getComputedStyle(form);
+                if (formStyle.backgroundColor) thank.style.background = formStyle.backgroundColor;
+                if (formStyle.border) thank.style.border = formStyle.border;
+                if (formStyle.borderRadius) thank.style.borderRadius = formStyle.borderRadius;
+                if (formStyle.boxShadow) thank.style.boxShadow = formStyle.boxShadow;
+                // preserve padding/layout so the message sits inside the same "outline"
+                thank.style.paddingTop = formStyle.paddingTop;
+                thank.style.paddingRight = formStyle.paddingRight;
+                thank.style.paddingBottom = formStyle.paddingBottom;
+                thank.style.paddingLeft = formStyle.paddingLeft;
+                thank.style.boxSizing = 'border-box';
+                // keep the same display so layout doesn't jump
+                thank.style.display = formStyle.display || 'block';
+                thank.style.width = formStyle.width && formStyle.width !== 'auto' ? formStyle.width : '100%';
+
+              // copy common font-related styles if available
+              if (refStyle) {
+                thank.style.fontFamily = refStyle.fontFamily;
+                thank.style.fontSize = refStyle.fontSize;
+                thank.style.lineHeight = refStyle.lineHeight;
+                thank.style.fontWeight = refStyle.fontWeight;
+                thank.style.margin = refStyle.margin;
+                thank.style.textAlign = refStyle.textAlign;
+              }
+
+              // replace the form with the thank you message
+              container.replaceChild(thank, form);
               form.reset();
             } catch (err) {
-              console.error(err);
-              feedback.style.color = 'crimson';
-              feedback.textContent = 'There was an error sending your message. Please try again later.';
+              console.error('Send error:', err);
+
+              // Mailto fallback: open user's email client with a prefilled message
+              try {
+          const subject = `Inquiry from ${data.name || 'website'}`;
+          const bodyLines = [
+            `Name: ${data.name || ''}`,
+            `Email: ${data.email || ''}`,
+            `Company: ${data.company || ''}`,
+            `Inquiry type: ${data.inquiry_type || ''}`,
+            `Product: ${data.product || ''}`,
+            `Preferred date: ${data.date || ''}`,
+            `Quantity: ${data.quantity || ''}`,
+            '',
+            data.message || ''
+          ];
+          const body = bodyLines.join('\n');
+          const mailto = 'mailto:' + encodeURIComponent(FALLBACK_EMAIL)
+            + '?subject=' + encodeURIComponent(subject)
+            + '&body=' + encodeURIComponent(body);
+
+          feedbackMessage('Could not send via server — opening your email client as a fallback.', 'crimson');
+          // Open mail client; user will need to send the email manually
+          window.location.href = mailto;
+              } catch (mailtoErr) {
+          console.error('Fallback mailto error:', mailtoErr);
+          feedbackMessage('There was an error sending your message. Please try again later.', 'crimson');
+              }
             } finally {
               btn.disabled = false;
               btn.textContent = 'Send inquiry';
@@ -257,9 +363,9 @@
       </div>
     </section>
     </section>
-
-    <!-- Contact -->
-   <!-- <section id="contact" class="section container contact">
+        </div>
+      </section>
+    </main>
       <div class="split">
         <div>
           <h3>Visit or say hello</h3>
