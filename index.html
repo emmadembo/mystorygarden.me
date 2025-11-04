@@ -173,6 +173,47 @@ h1, h2, p, .lead {
       .container.header-inner .logo { max-width: 40%; font-size: clamp(.8rem, 5.2vw, .98rem); }
       .container.header-inner .nav a { font-size: clamp(.68rem, 4.4vw, .88rem); padding: .25rem .45rem; }
     }
+
+    /* Mobile portrait: allow the logo text to wrap onto its own line while keeping the buttons
+       visible and on a single row (not cut off). Buttons remain large enough for touch. */
+    @media (max-width: 420px) and (orientation: portrait) {
+      .container.header-inner {
+        flex-wrap: wrap;           /* allow logo to flow to its own line */
+        align-items: center;
+        gap: .35rem;
+        padding: .35rem .5rem;
+      }
+
+      .container.header-inner .logo {
+        white-space: normal;       /* allow wrapping */
+        overflow: visible;         /* do not clip wrapped text */
+        text-overflow: unset;
+        max-width: 100%;
+        flex: 1 1 100%;            /* take the full row so it can wrap nicely */
+        text-align: center;
+        margin-bottom: .25rem;
+        font-size: clamp(.9rem, 6.8vw, 1.05rem);
+        line-height: 1.05;
+      }
+
+      .container.header-inner .nav {
+        flex: 1 1 100%;            /* occupy full width on the next row */
+        justify-content: center;   /* keep buttons centered and together */
+        flex-wrap: nowrap;         /* keep buttons on a single row */
+        overflow: visible;         /* ensure buttons are not clipped */
+        gap: .5rem;
+      }
+
+      .container.header-inner .nav a {
+        flex: 0 0 auto;            /* don't collapse buttons */
+        min-width: 120px;          /* ensure touch-friendly size */
+        padding: .55rem .75rem;    /* slightly larger tap targets */
+        font-size: clamp(.85rem, 4.6vw, .98rem);
+        box-sizing: border-box;
+        text-align: center;
+        line-height: 1;
+      }
+    }
   </style>
 
   <div class="container header-inner">
