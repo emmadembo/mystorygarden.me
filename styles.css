@@ -12,7 +12,7 @@
   --header-bg: rgba(255,255,255,0.8);
 
   /* Layout / spacing */
-  /* make the container fluid by default but cap at a sensible desktop max */
+  /* fluid container but cap at a sensible desktop max */
   --container: clamp(680px, 92vw, 1100px);
   --gap: 1.25rem;
 
@@ -24,16 +24,18 @@
   --break-md: 900px;
   --break-lg: 1400px;
 
-  /* Fluid typography (mobile-first, scales up smoothly) */
-  --font-size-base: clamp(14px, 1.8vw, 18px);
-  --h1-size: clamp(2rem, 5.5vw, 4.75rem);
-  --lead-size: clamp(1rem, 2.2vw, 1.25rem);
-  --line-height-base: 1.45;
+  /* Fluid typography (mobile-first, scales up smoothly).
+     tightened clamps so large headlines and base text scale down better on small viewports */
+  --font-size-base: clamp(13px, 3.6vw, 18px);
+  --h1-size: clamp(1.4rem, 7.5vw, 3.8rem);
+  --lead-size: clamp(.95rem, 3.5vw, 1.15rem);
+  --line-height-base: 1.4;
 
-  /* Constrain hero/photo sizing responsively */
-  --hero-photo-min: 200px;
+  /* Constrain hero/photo sizing responsively:
+     prefer a compact minimum on small screens and allow photos to expand to most of the viewport width */
+  --hero-photo-min: 120px;
   --hero-photo-max: 420px;
-  --hero-photo-width: clamp(var(--hero-photo-min), 30vw, var(--hero-photo-max));
+  --hero-photo-width: clamp(var(--hero-photo-min), 80vw, var(--hero-photo-max));
 
   /* Interaction tweaks */
   --tap-highlight: transparent;
