@@ -1,4 +1,52 @@
 <!doctype html>
+<style>
+/* Prevent mid-word breaks while keeping natural wrapping and hyphenation */
+body, p, h1, h2, h3, h4, h5, a, label, li {
+  word-break: normal;        /* don't forcibly break words */
+  overflow-wrap: normal;     /* prefer natural break points (spaces/hyphens) */
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;             /* allow browser hyphenation where supported */
+}
+
+/* Allow controlled breaking only for very long unbroken strings (URLs, long tokens) */
+code, pre, input[type="text"], input[type="email"], textarea {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Make images responsive and constrain large artwork on small viewports */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+
+/* Reduce hero/about photos on small screens to avoid forcing text reflows and mid-word breaks */
+.hero-photo img {
+  max-width: clamp(120px, 34vw, 360px); /* smaller on narrow viewports */
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.about-photo img,
+.photo-container img {
+  max-width: clamp(160px, 40vw, 420px);
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Small nicety: ensure headings and paragraph text reflow smoothly */
+h1, h2, p, .lead {
+  line-height: 1.1;
+  word-wrap: normal;
+  overflow-wrap: normal;
+}
+</style>
 <html lang="en">
 <head>
   <style>
