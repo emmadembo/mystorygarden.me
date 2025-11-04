@@ -40,6 +40,50 @@
   --focus-outline: 3px solid rgba(198,180,153,0.25);
 }
 
+/* Mobile-specific variable tuning so sections (text + photos) fit and match desktop proportions
+   while preserving the mobile-first stacking behavior. These updates only change variables so
+   existing layout rules adapt automatically. */
+@media (max-width: 639px) {
+  :root{
+    --container: 94%;
+    --gap: 0.75rem;
+    --font-size-base: clamp(13px, 3.6vw, 16px);
+    --h1-size: clamp(1.4rem, 7.5vw, 2.2rem);
+    --lead-size: clamp(.95rem, 3.5vw, 1.05rem);
+    --hero-photo-min: 140px;
+    --hero-photo-max: 420px;
+    --hero-photo-width: 100%;
+    --tap-size: 48px; /* larger touch targets on mobile */
+    --header-bg: rgba(255,255,255,0.92); /* slightly more opaque to aid contrast on small screens */
+  }
+}
+
+/* Extra-tight portrait phones: keep headline & images comfortably sized and prevent overflow */
+@media (max-width: 420px) and (orientation: portrait) {
+  :root{
+    --container: 96%;
+    --gap: 0.5rem;
+    --font-size-base: clamp(13px, 4.2vw, 15px);
+    --h1-size: clamp(1.25rem, 8.5vw, 1.9rem);
+    --lead-size: 0.95rem;
+    --hero-photo-min: 120px;
+    --hero-photo-width: 100%;
+    --tap-size: 48px;
+  }
+}
+
+/* Landscape phones/small tablets: encourage a two-column-ish feel by allowing the photo to take a narrower,
+   fixed column similar to desktop while still keeping the main column readable */
+@media (max-width: 899px) and (orientation: landscape) {
+  :root{
+    --container: 92%;
+    --gap: 1rem;
+    --hero-photo-min: 160px;
+    --hero-photo-width: clamp(160px, 28vw, 340px);
+    --h1-size: clamp(1.6rem, 5.6vw, 2.2rem);
+  }
+}
+
 /* Force header to use the restored variable (overrides any later direct background) */
 .site-header { background: var(--header-bg) !important; }
 
