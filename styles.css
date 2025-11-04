@@ -1,4 +1,5 @@
 :root{
+  /* Colors & surfaces */
   --bg: #f2f1ec;
   --card: #ffffff;
   --muted: #0f0b03;
@@ -6,9 +7,35 @@
   --accent-2: #0f0b03;
   --shadow: 0 8px 24px rgba(17,17,17,0.08);
   --radius: 12px;
-  --container: 1100px;
+
+  /* Layout / spacing */
+  --container: 1100px;      /* desktop max */
   --gap: 1.25rem;
-  --tap-size: 44px; /* recommended minimum touch target */
+
+  /* Touch / accessibility */
+  --tap-size: 44px;        /* baseline; increased for touch via pointer:coarse later */
+
+  /* Responsive breakpoints (used elsewhere in the sheet) */
+  --break-sm: 640px;
+  --break-md: 900px;
+  --break-lg: 1400px;
+
+  /* Fluid typography (mobile-first, scales up smoothly) */
+  --font-size-base: clamp(14px, 1.8vw, 18px);
+  --h1-size: clamp(2rem, 5.5vw, 4.75rem);
+  --lead-size: clamp(1rem, 2.2vw, 1.25rem);
+
+  /* Constrain hero/photo sizing responsively */
+  --hero-photo-min: 200px;
+  --hero-photo-max: 420px;
+  --hero-photo-width: clamp(var(--hero-photo-min), 30vw, var(--hero-photo-max));
+
+  /* Container responsive cap (keeps proportions on very large screens) */
+  --container-responsive: clamp(680px, 92vw, var(--container));
+
+  /* Interaction tweaks */
+  --tap-highlight: transparent;
+  --focus-outline: 3px solid rgba(198,180,153,0.25);
 }
 
 /* Base / Mobile-first */
@@ -49,14 +76,25 @@ body{
 
 /* Header */
 .site-header{
-  background:transparent;
-  position:sticky;
-  top:0;
-  z-index:40;
+  background: rgba(255,255,255,0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
   backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   /* support safe-area on iPhone notch */
   padding-top: env(safe-area-inset-top, 0);
+  box-shadow: 0 4px 18px rgba(3,10,10,0.06);
+  transition: background 160ms ease, box-shadow 160ms ease;
 }
+
+:root {
+  /* make in-page anchor clicks (like the logo) scroll smoothly */
+  scroll-behavior: smooth;
+}
+
 .header-inner{
   display:flex;
   align-items:center;
@@ -350,7 +388,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     -webkit-backdrop-filter: blur(6px);
   }
 }
-}
+
 
 /* Backdrop-filter support fallback: keep original look if not supported */
 @supports not ((-webkit-backdrop-filter: blur(6px)) or (backdrop-filter: blur(6px))) {

@@ -1,5 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js" dir="ltr" data-theme="light">
+<script>
+  // quick progressive enhancement: remove no-js and expose safe-area vars for iOS
+  (function(){
+    document.documentElement.classList.remove('no-js');
+    try {
+      const root = document.documentElement;
+      root.style.setProperty('--safe-area-top', 'env(safe-area-inset-top, 0px)');
+      root.style.setProperty('--safe-area-bottom', 'env(safe-area-inset-bottom, 0px)');
+      root.style.setProperty('--safe-area-left', 'env(safe-area-inset-left, 0px)');
+      root.style.setProperty('--safe-area-right', 'env(safe-area-inset-right, 0px)');
+    } catch (e) {}
+  })();
+</script>
 <head>
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,200;1,200&family=Questrial&display=swap');
@@ -17,7 +30,7 @@
 </head>
 
 <body>
-  <header class="site-header">
+  <header class="site-header" style="position:sticky; top:0; left:0; right:0; z-index:9999; background:#fff; box-shadow:0 2px 6px rgba(0,0,0,0.08);">
   <script>
   (function(){
     const header = document.querySelector('.site-header');
