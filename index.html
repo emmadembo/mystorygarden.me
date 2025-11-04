@@ -131,37 +131,98 @@ h1, h2, p, .lead {
   </header>
 
   <main>
+    <style>
+      /* Compact, mobile-first hero tweaks to ensure portrait fit */
+      .hero { padding: clamp(1rem, 6vw, 2.5rem) 0; }
+      .hero-grid {
+        display: flex;
+        gap: clamp(0.75rem, 3vw, 2rem);
+        align-items: center;
+        justify-content: space-between;
+      }
+      .hero-text { flex: 1 1 320px; }
+      .hero-photo { flex: 1 1 320px; display: flex; align-items: center; justify-content: center; }
+
+      .hero-text h1 {
+        font-size: clamp(1.6rem, 7.5vw, 3rem);
+        line-height: 1.05;
+        margin: 0 0 .5rem;
+        word-break: keep-all;
+      }
+      .hero-text h2 {
+        font-size: clamp(1rem, 4.2vw, 1.75rem);
+        line-height: 1.05;
+        margin: 0 0 .75rem;
+      }
+      .hero-text .lead {
+        font-size: clamp(.9rem, 3.6vw, 1rem);
+        margin: 0 0 .75rem;
+      }
+
+      .hero-cta { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+
+      .hero-photo img {
+        width: 100%;
+        max-width: 420px;
+        max-height: 60vh;
+        height: auto;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+      }
+
+      /* Portrait / small screens: stack, center and reduce image height so text fits */
+      @media (max-width: 600px) {
+        .hero-grid {
+          flex-direction: column-reverse;
+          text-align: center;
+          gap: clamp(.5rem, 3vw, 1rem);
+        }
+        .hero-text { width: 100%; padding: 0 .75rem; }
+        .hero-photo { width: 100%; padding: 0 .75rem; }
+
+        .hero-text h1 { font-size: clamp(1.4rem, 9.5vw, 2.2rem); }
+        .hero-text h2 { font-size: clamp(.95rem, 5vw, 1.2rem); margin-bottom: .5rem; }
+        .hero-text .lead { font-size: clamp(.85rem, 4vw, .98rem); }
+
+        .hero-cta { justify-content: center; }
+        /* Make CTAs finger-friendly while keeping them side-by-side when possible */
+        .hero-cta a { min-width: 140px; flex: 1 1 auto; padding: .65rem .85rem; box-sizing: border-box; }
+        .hero-photo img { max-width: 72vw; max-height: 40vh; }
+      }
+    </style>
+
     <!-- Hero -->
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-text">
-    <!-- TITLE -->
+          <!-- TITLE -->
           <h1>The Story Garden</h1>
-          <h2 style="font-size:clamp(1rem,4vw,2rem); line-height:1.05; margin:0 0 1rem;">
+          <h2 style="margin-bottom:0.75rem;">
             Grow your story. Sustainably. Beautifully.
           </h2>
-    <!-- SUBTEXT TO TITLE -->
+
+          <!-- SUBTEXT TO TITLE -->
           <p class="lead">
-            Our compact hydroponic systems lets you cultivate thriving plants anywhere,
-             with style and purpose.
+            Our compact hydroponic systems let you cultivate thriving plants anywhere,
+            with style and purpose.
           </p>
-          <p class="meta">
-          </p>
-    <!-- BUTTONS -->
+          <p class="meta" aria-hidden="true"></p>
+
+          <!-- BUTTONS -->
           <div class="hero-cta">
-            <a href="#Shop" class="btn-primary">Shop</a>
-            <a href="#Contact" class="btn-link">Contact</a>
+            <a href="#Shop" class="btn-primary" aria-label="Shop The Eden System">Shop</a>
+            <a href="#Contact" class="btn-link" aria-label="Contact us">Contact</a>
           </div>
         </div>
 
         <figure class="hero-photo" aria-hidden="true">
-
-    <!-- Placeholder image; replace with real photography -->
+          <!-- Placeholder image; replace with real photography -->
           <img src="System Design With Plants.png" alt="System Design With Plants"
-            srcset="System Design With Plants.png 1x, System Design With Plants@2x.png 2x"
-            sizes="(max-width:480px) 92vw, (orientation:portrait) 92vw, 400px"
-            loading="lazy" decoding="async"
-            style="width:100%; max-width:400px; max-height:60vh; height:auto; display:block; margin:0 auto; border-radius:0 !important; object-fit:contain;">
+               srcset="System Design With Plants.png 1x, System Design With Plants@2x.png 2x"
+               sizes="(max-width:480px) 92vw, (orientation:portrait) 92vw, 400px"
+               loading="lazy" decoding="async"
+               style="border-radius:0 !important; object-fit:contain;">
         </figure>
       </div>
     </section>
