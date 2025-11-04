@@ -8,6 +8,9 @@
   --shadow: 0 8px 24px rgba(17,17,17,0.08);
   --radius: 12px;
 
+  /* Header color (restored to original) */
+  --header-bg: rgba(255,255,255,0.8);
+
   /* Layout / spacing */
   /* make the container fluid by default but cap at a sensible desktop max */
   --container: clamp(680px, 92vw, 1100px);
@@ -36,6 +39,9 @@
   --tap-highlight: transparent;
   --focus-outline: 3px solid rgba(198,180,153,0.25);
 }
+
+/* Force header to use the restored variable (overrides any later direct background) */
+.site-header { background: var(--header-bg) !important; }
 
 /* Base responsive helpers to ensure text & media reflow on small screens */
 html { font-size: var(--font-size-base); -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
