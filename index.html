@@ -388,7 +388,7 @@ h1, h2, p, .lead {
     <section id="Contact" class="section booking">
       <div class="container booking-inner">
         <div>
-          <h2>Get in Touch!</h2>
+          <h2 style="font-size:clamp(1.8rem,5.2vw,2.8rem); line-height:1.05; margin-bottom:1rem;">Get in Touch!</h2>
           <p>Questions about our system or wholesale inquiries?</p>
           <p>Send us a message and we’ll be in touch soon.</p>
         </div>
@@ -399,7 +399,7 @@ h1, h2, p, .lead {
         -->
         <form id="inquiry-form" class="inquiry-form" novalidate>
           <fieldset>
-            <legend>Customer (required)</legend>
+            <legend>Contact Information (required)</legend>
 
             <label>
               Full name
@@ -436,11 +436,6 @@ h1, h2, p, .lead {
             <label>
               Estimated quantity (for wholesale, optional)
               <input type="number" name="quantity" min="1" max="10000" />
-            </label>
-
-            <label>
-              Product of interest (optional)
-              <input type="text" name="product" placeholder="e.g. The Eden System, components, wholesale program" />
             </label>
 
             <label>
