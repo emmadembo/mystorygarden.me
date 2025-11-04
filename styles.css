@@ -12,34 +12,81 @@
   --header-bg: rgba(255,255,255,0.8);
 
   /* Layout / spacing */
-  /* fluid container but cap at a sensible desktop max */
   --container: clamp(680px, 92vw, 1100px);
   --gap: 1.25rem;
 
   /* Touch / accessibility */
-  --tap-size: 44px;        /* baseline; increased for touch via pointer:coarse later */
+  --tap-size: 44px;
 
-  /* Responsive breakpoints (used elsewhere in the sheet) */
+  /* Breakpoints */
   --break-sm: 640px;
   --break-md: 900px;
   --break-lg: 1400px;
 
-  /* Fluid typography (mobile-first, scales up smoothly).
-     tightened clamps so large headlines and base text scale down better on small viewports */
-  --font-size-base: clamp(13px, 3.6vw, 18px);
-  --h1-size: clamp(1.4rem, 7.5vw, 3.8rem);
-  --lead-size: clamp(.95rem, 3.5vw, 1.15rem);
+  /* Fluid typography (mobile-first) — tuned so text scales with viewport width
+     while avoiding excessive wrapping on narrow portrait screens. */
+  --font-size-base: clamp(12px, 4.0vw, 18px);
+  --h1-size: clamp(1.2rem, 8.5vw, 3.2rem);
+  --lead-size: clamp(.95rem, 3.8vw, 1.15rem);
   --line-height-base: 1.4;
 
-  /* Constrain hero/photo sizing responsively:
-     prefer a compact minimum on small screens and allow photos to expand to most of the viewport width */
+  /* Hero/photo sizing */
   --hero-photo-min: 120px;
   --hero-photo-max: 420px;
   --hero-photo-width: clamp(var(--hero-photo-min), 80vw, var(--hero-photo-max));
 
-  /* Interaction tweaks */
+  /* Interaction */
   --tap-highlight: transparent;
   --focus-outline: 3px solid rgba(198,180,153,0.25);
+}
+
+/* Portrait phone tuning: scale text down smoothly, reduce headings to avoid forced wrapping */
+@media (max-width: 639px) and (orientation: portrait) {
+  :root{
+    --font-size-base: clamp(12px, 4.6vw, 16px);
+    --h1-size: clamp(1.1rem, 9.5vw, 2.6rem);
+    --lead-size: clamp(.95rem, 4.0vw, 1.05rem);
+    --line-height-base: 1.32;
+  }
+
+  /* make these rules stronger so they take effect even if other breakpoints set exact sizes later */
+  html { font-size: var(--font-size-base) !important; }
+
+  /* keep headlines readable without forcing long, awkward wraps */
+  .hero-text h1 {
+    font-size: var(--h1-size) !important;
+    line-height: 1.06 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+  }
+
+  .lead, p, li, a, span {
+    font-size: var(--font-size-base) !important;
+    line-height: var(--line-height-base) !important;
+  }
+}
+
+/* PORTRAIT VIEW ON MOBILE DEVICES */
+/* Extra-tight portrait phones: further tighten scales to prevent overflow */
+@media (max-width: 420px) and (orientation: portrait) {
+  :root{
+    --font-size-base: clamp(11px, 5.2vw, 15px);
+    --h1-size: clamp(1rem, 10.5vw, 2.2rem);
+    --lead-size: 0.95rem;
+    --line-height-base: 1.28;
+  }
+
+  html { font-size: var(--font-size-base) !important; }
+  .hero-text h1 {
+    font-size: var(--h1-size) !important;
+    line-height: 1.05 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+    max-width: 100% !important;
+  }
+  .lead, p, li, a, span { font-size: var(--font-size-base) !important; line-height: var(--line-height-base) !important; }
 }
 
 /* Mobile-specific variable tuning so sections (text + photos) fit and match desktop proportions
