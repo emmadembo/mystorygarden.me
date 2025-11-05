@@ -526,37 +526,42 @@ h1, h2, p, .lead {
         <script>
   // FORM SUBMISSION HANDLING
   // Client: submit form JSON to Formspree. Replace <YOUR_FORM_ID> with your actual Formspree form ID.
-            const SEND_ENDPOINT = 'https://formspree.io/f/mqagvyaq';
-            const FALLBACK_EMAIL = 'you@example.com'; // replace with your inbox for mailto fallback
-            const FALLBACK_DISPLAY = 'Contact Story Garden';
-
-            function feedbackMessage(text, color = '') {
-            const el = document.getElementById('inquiry-feedback');
-            el.style.color = color;
-            el.textContent = text;
-            }
-
-            document.getElementById('inquiry-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const form = e.target;
-            const data = Object.fromEntries(new FormData(form).entries());
-            const btn = form.querySelector('button[type="submit"]');
-
-            btn.disabled = true;
-            btn.textContent = 'Sending…';
-            feedbackMessage('', '');
-
-            try {
-    // Use AbortController for a simple timeout
-              const controller = new AbortController();
-              const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
-
-              const res = await fetch(SEND_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-          signal: controller.signal
-              });
+              const SEND_ENDPOINT = 'https://formspree.io/f/mqagvyaq';
+              const FALLBACK_EMAIL = 'you@example.com'; // replace with your inbox for mailto fallback
+              const FALLBACK_DISPLAY = 'Contact Story Garden';
+  
+              function feedbackMessage(text, color = '') {
+              const el = document.getElementById('inquiry-feedback');
+              el.style.color = color;
+              el.textContent = text;
+              }
+  
+              document.getElementById('inquiry-form').addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const form = e.target;
+              const data = Object.fromEntries(new FormData(form).entries());
+              const btn = form.querySelector('button[type="submit"]');
+  
+              btn.disabled = true;
+              btn.textContent = 'Sending…';
+              feedbackMessage('', '');
+  
+              try {
+      // Use AbortController for a simple timeout
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+  
+                // Ask for JSON response and use CORS mode to avoid HTML redirects that can cause non-ok responses in some browsers/users
+                const res = await fetch(SEND_ENDPOINT, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(data),
+            signal: controller.signal,
+            mode: 'cors'
+                });
 
               clearTimeout(timeoutId);
 
