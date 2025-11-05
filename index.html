@@ -529,15 +529,24 @@ h1, h2, p, .lead {
               const SEND_ENDPOINT = 'https://formspree.io/f/mqagvyaq';
               const FALLBACK_EMAIL = 'you@example.com'; // replace with your inbox for mailto fallback
               const FALLBACK_DISPLAY = 'Contact Story Garden';
-  
+
               function feedbackMessage(text, color = '') {
-              const el = document.getElementById('inquiry-feedback');
-              el.style.color = color;
-              el.textContent = text;
+                const el = document.getElementById('inquiry-feedback');
+                if (!el) return;
+                el.style.color = color || '';
+                el.textContent = text;
               }
-  
+
+              // Ensure non-JS fallback works: set form action/method to Formspree
+              const _form = document.getElementById('inquiry-form');
+              if (_form) {
+                _form.setAttribute('action', SEND_ENDPOINT);
+                _form.setAttribute('method', 'POST');
+                // Optional: add a hidden input for Formspree email forwarding, e.g. <input type="hidden" name="_replyto" />
+              }
+
               document.getElementById('inquiry-form').addEventListener('submit', async (e) => {
-              e.preventDefault();
+                e.preventDefault();
               const form = e.target;
               const data = Object.fromEntries(new FormData(form).entries());
               const btn = form.querySelector('button[type="submit"]');
