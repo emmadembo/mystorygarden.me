@@ -528,10 +528,7 @@ h1, h2, p, .lead {
   // Client: submit form JSON to Formspree. Replace <YOUR_FORM_ID> with your actual Formspree form ID.
               action="https://formspree.io/f/mqagvyaq"
               method="POST"
-              const SEND_ENDPOINT = 'https://formspree.io/f/mqagvyaq';
-              const FALLBACK_EMAIL = 'you@example.com'; // replace with your inbox for mailto fallback
-              const FALLBACK_DISPLAY = 'Contact Story Garden';
-  
+              const SEND_ENDPOINT = 'https://formspree.io/f/mqagvyaq';  
               function feedbackMessage(text, color = '') {
               const el = document.getElementById('inquiry-feedback');
               el.style.color = color;
