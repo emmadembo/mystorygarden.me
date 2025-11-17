@@ -461,7 +461,7 @@ h1, h2, p, .lead {
         </div>
 
   <!--
-FORM POSTS JSON to /api/send-email (server). The recipient email is kept on the server
+  FORM POSTS JSON to /api/send-email (server). The recipient email is kept on the server
   and can be changed in the server's environment variables (see server.js/.env below).
         -->
         <form id="inquiry-form" class="inquiry-form" novalidate>
@@ -641,7 +641,34 @@ FORM POSTS JSON to /api/send-email (server). The recipient email is kept on the 
               form.reset();
             } catch (err) {
               console.error('Send error:', err);
-        
+
+          // Mailto fallback: open user's email client with a prefilled message
+              try {
+          const subject = `Inquiry from ${data.name || 'website'}`;
+          const bodyLines = [
+            `Name: ${data.name || ''}`,
+            `Email: ${data.email || ''}`,
+            `Company: ${data.company || ''}`,
+            `Inquiry type: ${data.inquiry_type || ''}`,
+            `Product: ${data.product || ''}`,
+            `Preferred date: ${data.date || ''}`,
+            `Quantity: ${data.quantity || ''}`,
+            '',
+            data.message || ''
+          ];
+      
+
+          feedbackMessage('Could not send via server — opening your email client as a fallback.', 'crimson');
+      // Open mail client; user will need to send the email manually
+          window.location.href = mailto;
+              } catch (mailtoErr) {
+          console.error('Fallback mailto error:', mailtoErr);
+          feedbackMessage('There was an error sending your message. Please try again later.', 'crimson');
+              }
+            } finally {
+              btn.disabled = false;
+              btn.textContent = 'Send inquiry';
+            }
           });
         </script>
       </div>
@@ -669,7 +696,7 @@ FORM POSTS JSON to /api/send-email (server). The recipient email is kept on the 
         </div>
       </section>
       </main>
-
+    -->
 
   <footer class="site-footer">
     <div class="container">
