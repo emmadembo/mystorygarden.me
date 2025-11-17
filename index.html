@@ -464,7 +464,7 @@ h1, h2, p, .lead {
   FORM POSTS JSON to /api/send-email (server). The recipient email is kept on the server
   and can be changed in the server's environment variables (see server.js/.env below).
         -->
-        <form id="inquiry-form" class="inquiry-form" novalidate>
+        <form id="inquiry-form" class="inquiry-form" action="https://formspree.io/f/mqagvyaq" method="POST" novalidate>
           <fieldset>
             <legend>Contact Information (required)</legend>
 
@@ -525,151 +525,145 @@ h1, h2, p, .lead {
 
         <script>
   // FORM SUBMISSION HANDLING
-  // Client: submit form JSON to Formspree. Replace <YOUR_FORM_ID> with your actual Formspree form ID.
-              action="https://formspree.io/f/mqagvyaq"
-              method="POST"
-              const SEND_ENDPOINT = 'https://formspree.io/f/mqagvyaq';  
-              function feedbackMessage(text, color = '') {
-              const el = document.getElementById('inquiry-feedback');
-              el.style.color = color;
-              el.textContent = text;
-              }
-  
-              document.getElementById('inquiry-form').addEventListener('submit', async (e) => {
-              e.preventDefault();
-              const form = e.target;
-              const data = Object.fromEntries(new FormData(form).entries());
-              const btn = form.querySelector('button[type="submit"]');
-  
-              btn.disabled = true;
-              btn.textContent = 'Sending…';
-              feedbackMessage('', '');
-  
-              try {
+  // Client: submit form JSON to Formspree.
+  const SEND_ENDPOINT = 'https://formspree.io/f/mqagvyaq';
+
+  function feedbackMessage(text, color = '') {
+    const el = document.getElementById('inquiry-feedback');
+    if (!el) return;
+    el.style.color = color;
+    el.textContent = text;
+  }
+
+  document.getElementById('inquiry-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const data = Object.fromEntries(new FormData(form).entries());
+    const btn = form.querySelector('button[type="submit"]');
+
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+    }
+    feedbackMessage('', '');
+
+    try {
       // Use AbortController for a simple timeout
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
-  
-                // Ask for JSON response and use CORS mode to avoid HTML redirects that can cause non-ok responses in some browsers/users
-                const res = await fetch(SEND_ENDPOINT, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify(data),
-            signal: controller.signal,
-            mode: 'cors'
-                });
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
 
-              clearTimeout(timeoutId);
+      // Ask for JSON response and use CORS mode
+      const res = await fetch(SEND_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data),
+        signal: controller.signal,
+        mode: 'cors'
+      });
 
-              if (!res.ok) {
-          let details = '';
-          try { details = await res.text(); } catch (_) {}
-          throw new Error('Server responded with ' + res.status + (details ? ': ' + details : ''));
-              }
+      clearTimeout(timeoutId);
 
-          // replace feedbackMessage with inline thank-you h2 in same style as page h2
-              const form = document.getElementById('inquiry-form');
-          // replace feedbackMessage with inline thank-you h2 in same style as page h2
-                            const container = form.parentNode;
-                const section = document.getElementById('Contact') || form.closest('.booking') || form.closest('section');
-          // prefer a paragraph in the same section for "section text" font; fall back to first h2/p
-                const refText = section ? section.querySelector('p') : document.querySelector('p') || document.querySelector('h2');
-                const refStyle = refText ? window.getComputedStyle(refText) : null;
+      if (!res.ok) {
+        let details = '';
+        try { details = await res.text(); } catch (_) {}
+        throw new Error('Server responded with ' + res.status + (details ? ': ' + details : ''));
+      }
 
-          // create a container (this will be the node that replaces the form)
-                const rect = form.getBoundingClientRect();
-                const thank = document.createElement('div');
-                thank.setAttribute('role', 'status');
-                thank.setAttribute('aria-live', 'polite');
+      // show inline thank-you message replacing the form
+      const formEl = document.getElementById('inquiry-form');
+      const container = formEl.parentNode;
+      const section = document.getElementById('Contact') || formEl.closest('.booking') || formEl.closest('section');
+      const refText = section ? section.querySelector('p') : document.querySelector('p') || document.querySelector('h2');
+      const refStyle = refText ? window.getComputedStyle(refText) : null;
 
-            // Preserve the form's size/shape so replacing it doesn't change layout
-            // ensure the preserved frame expands to fill the available horizontal space,
-            // while allowing the inner text to wrap responsively on small devices
-                thank.style.minWidth = '100%';
-                thank.style.width = '100%';
-                thank.style.maxWidth = '100%';
-                thank.style.boxSizing = 'border-box';
-                thank.style.whiteSpace = 'normal';
-                thank.style.wordBreak = 'break-word';
-                thank.style.wordWrap = 'break-word';
-                thank.style.minHeight = rect.height + 'px';
-                thank.style.boxSizing = 'border-box';
+      const rect = formEl.getBoundingClientRect();
+      const thank = document.createElement('div');
+      thank.setAttribute('role', 'status');
+      thank.setAttribute('aria-live', 'polite');
 
-            // Center the message inside the preserved frame
-                thank.style.display = 'flex';
-                thank.style.alignItems = 'center';
-                thank.style.justifyContent = 'center';
-                thank.style.textAlign = 'center';
+      // preserve frame shape/size
+      thank.style.minWidth = '100%';
+      thank.style.width = '100%';
+      thank.style.maxWidth = '100%';
+      thank.style.boxSizing = 'border-box';
+      thank.style.whiteSpace = 'normal';
+      thank.style.wordBreak = 'break-word';
+      thank.style.wordWrap = 'break-word';
+      thank.style.minHeight = rect.height + 'px';
 
-            // create the visible message inside the container
-                const msg = document.createElement('h2');
-                msg.textContent = "Thanks — we'll be in touch soon!";
-                msg.style.margin = '0'; // keep spacing neat inside the form frame
-                thank.appendChild(msg);
+      // center message
+      thank.style.display = 'flex';
+      thank.style.alignItems = 'center';
+      thank.style.justifyContent = 'center';
+      thank.style.textAlign = 'center';
 
-            // copy the form's visual frame (background, border, padding, etc.) onto the wrapper
-                const formStyle = window.getComputedStyle(form);
-                if (formStyle.backgroundColor) thank.style.background = formStyle.backgroundColor;
-                if (formStyle.border) thank.style.border = formStyle.border;
-                if (formStyle.borderRadius) thank.style.borderRadius = formStyle.borderRadius;
-                if (formStyle.boxShadow) thank.style.boxShadow = formStyle.boxShadow;
-            // preserve padding/layout so the message sits inside the same "outline"
-                thank.style.paddingTop = formStyle.paddingTop;
-                thank.style.paddingRight = formStyle.paddingRight;
-                thank.style.paddingBottom = formStyle.paddingBottom;
-                thank.style.paddingLeft = formStyle.paddingLeft;
-                thank.style.boxSizing = 'border-box';
-            // keep the same display so layout doesn't jump
-                thank.style.display = formStyle.display || 'block';
-                thank.style.width = formStyle.width && formStyle.width !== 'auto' ? formStyle.width : '100%';
+      const msg = document.createElement('h2');
+      msg.textContent = "Thanks — we'll be in touch soon!";
+      msg.style.margin = '0';
+      thank.appendChild(msg);
 
-          // copy common font-related styles if available
-              if (refStyle) {
-                thank.style.fontFamily = refStyle.fontFamily;
-                thank.style.fontSize = refStyle.fontSize;
-                thank.style.lineHeight = refStyle.lineHeight;
-                thank.style.fontWeight = refStyle.fontWeight;
-                thank.style.margin = refStyle.margin;
-                thank.style.textAlign = refStyle.textAlign;
-              }
+      // copy visual styles from form
+      const formStyle = window.getComputedStyle(formEl);
+      if (formStyle.backgroundColor) thank.style.background = formStyle.backgroundColor;
+      if (formStyle.border) thank.style.border = formStyle.border;
+      if (formStyle.borderRadius) thank.style.borderRadius = formStyle.borderRadius;
+      if (formStyle.boxShadow) thank.style.boxShadow = formStyle.boxShadow;
+      thank.style.paddingTop = formStyle.paddingTop;
+      thank.style.paddingRight = formStyle.paddingRight;
+      thank.style.paddingBottom = formStyle.paddingBottom;
+      thank.style.paddingLeft = formStyle.paddingLeft;
+      thank.style.boxSizing = 'border-box';
+      thank.style.display = formStyle.display || 'block';
+      thank.style.width = formStyle.width && formStyle.width !== 'auto' ? formStyle.width : '100%';
 
-          // replace the form with the thank you message
-              container.replaceChild(thank, form);
-              form.reset();
-            } catch (err) {
-              console.error('Send error:', err);
+      if (refStyle) {
+        thank.style.fontFamily = refStyle.fontFamily;
+        thank.style.fontSize = refStyle.fontSize;
+        thank.style.lineHeight = refStyle.lineHeight;
+        thank.style.fontWeight = refStyle.fontWeight;
+        thank.style.margin = refStyle.margin;
+        thank.style.textAlign = refStyle.textAlign;
+      }
 
-          // Mailto fallback: open user's email client with a prefilled message
-              try {
-          const subject = `Inquiry from ${data.name || 'website'}`;
-          const bodyLines = [
-            `Name: ${data.name || ''}`,
-            `Email: ${data.email || ''}`,
-            `Company: ${data.company || ''}`,
-            `Inquiry type: ${data.inquiry_type || ''}`,
-            `Product: ${data.product || ''}`,
-            `Preferred date: ${data.date || ''}`,
-            `Quantity: ${data.quantity || ''}`,
-            '',
-            data.message || ''
-          ];
-      
+      container.replaceChild(thank, formEl);
+      formEl.reset();
 
-          feedbackMessage('Could not send via server — opening your email client as a fallback.', 'crimson');
-      // Open mail client; user will need to send the email manually
-          window.location.href = mailto;
-              } catch (mailtoErr) {
-          console.error('Fallback mailto error:', mailtoErr);
-          feedbackMessage('There was an error sending your message. Please try again later.', 'crimson');
-              }
-            } finally {
-              btn.disabled = false;
-              btn.textContent = 'Send inquiry';
-            }
-          });
+    } catch (err) {
+      console.error('Send error:', err);
+
+      // Mailto fallback: open user's email client with a prefilled message
+      try {
+        const subject = `Inquiry from ${data.name || 'website'}`;
+        const bodyLines = [
+          `Name: ${data.name || ''}`,
+          `Email: ${data.email || ''}`,
+          `Company: ${data.company || ''}`,
+          `Inquiry type: ${data.inquiry_type || ''}`,
+          `Product: ${data.product || ''}`,
+          `Preferred date: ${data.date || ''}`,
+          `Quantity: ${data.quantity || ''}`,
+          '',
+          data.message || ''
+        ];
+
+        feedbackMessage('Could not send via server — opening your email client as a fallback.', 'crimson');
+
+        const mailto = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+        window.location.href = mailto;
+      } catch (mailtoErr) {
+        console.error('Fallback mailto error:', mailtoErr);
+        feedbackMessage('There was an error sending your message. Please try again later.', 'crimson');
+      }
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = 'Send inquiry';
+      }
+    }
+  });
         </script>
       </div>
     </section>
