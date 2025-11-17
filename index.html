@@ -461,7 +461,7 @@ h1, h2, p, .lead {
         </div>
 
   <!--
-  FORM POSTS JSON to /api/send-email (server). The recipient email is kept on the server
+FORM POSTS JSON to /api/send-email (server). The recipient email is kept on the server
   and can be changed in the server's environment variables (see server.js/.env below).
         -->
         <form id="inquiry-form" class="inquiry-form" novalidate>
@@ -640,8 +640,9 @@ h1, h2, p, .lead {
               container.replaceChild(thank, form);
               form.reset();
             } catch (err) {
-              console.error('Send error:', err);        ;
-  
+              console.error('Send error:', err);
+        
+          });
         </script>
       </div>
     </section>
@@ -668,7 +669,7 @@ h1, h2, p, .lead {
         </div>
       </section>
       </main>
-    -->
+
 
   <footer class="site-footer">
     <div class="container">
