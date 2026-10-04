@@ -605,3 +605,54 @@ body{
 .inquiry-form textarea {
   margin-top: .35rem;
 }
+
+/* Button reset + brand styling (fixes iOS/Android default blue submit button) */
+.btn-primary {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-block;
+  background: var(--accent-2);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: .75rem 1.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  min-height: var(--tap-size);
+  transition: background 160ms ease, transform 120ms ease;
+}
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: #000;
+  transform: translateY(-1px);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-block;
+  background: transparent;
+  color: var(--accent-2);
+  border: 1.5px solid var(--accent-2);
+  border-radius: 8px;
+  padding: .6rem 1.2rem;
+  font-family: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  min-height: var(--tap-size);
+}
+
+@media (max-width: 639px) {
+  .btn-primary,
+  .btn-outline {
+    width: 100%;
+  }
+}
