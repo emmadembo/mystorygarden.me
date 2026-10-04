@@ -91,6 +91,50 @@ img, picture, video, svg,
     --tap-size: 48px; /* larger touch targets on mobile */
     --header-bg: rgba(255,255,255,0.92); /* slightly more opaque to aid contrast on small screens */
   }
+
+  /* About section: override inline flex styles, stack image above text cleanly */
+  .about-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.25rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .about-photo {
+    flex: none !important;
+    width: 100%;
+  }
+  .about-photo .photo-container {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .about-photo img {
+    width: 100%;
+    height: auto;
+    max-width: 320px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .about-text {
+    flex: none !important;
+    width: 100%;
+    text-align: left;
+  }
+  .about-text p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  /* About heading: center it nicely instead of forced right-align from inline style */
+  #about h2 {
+    text-align: center !important;
+    font-size: clamp(1.75rem, 7vw, 2.5rem) !important;
+    margin-bottom: 1.5rem !important;
+  }
 }
 
 /* Extra-tight portrait phones: keep headline & images comfortably sized and prevent overflow */
@@ -369,6 +413,50 @@ body{
   .nav a {
     padding: .6rem .4rem;
     width: 100%;
+  }
+
+  /* About section: override inline flex styles, stack image above text cleanly */
+  .about-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.25rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .about-photo {
+    flex: none !important;
+    width: 100%;
+  }
+  .about-photo .photo-container {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .about-photo img {
+    width: 100%;
+    height: auto;
+    max-width: 320px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .about-text {
+    flex: none !important;
+    width: 100%;
+    text-align: left;
+  }
+  .about-text p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  /* About heading: center it nicely instead of forced right-align from inline style */
+  #about h2 {
+    text-align: center !important;
+    font-size: clamp(1.75rem, 7vw, 2.5rem) !important;
+    margin-bottom: 1.5rem !important;
   }
 }
 
