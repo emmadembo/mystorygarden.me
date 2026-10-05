@@ -727,3 +727,68 @@ body{
     display: block;
   }
 }
+
+/* Eden carousel wrapper */
+.eden-carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.eden-carousel-track {
+  display: flex;
+  transition: transform 420ms ease;
+  width: 100%;
+}
+
+.eden-carousel-slide {
+  flex: 0 0 100%;
+  width: 100%;
+}
+
+/* Prev/Next buttons */
+.eden-carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 160ms ease;
+}
+.eden-carousel-btn:hover { background: rgba(0,0,0,0.75); }
+.eden-carousel-prev { left: 1rem; }
+.eden-carousel-next { right: 1rem; }
+
+/* Dots */
+.eden-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+  margin-top: 1rem;
+}
+.eden-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,0.25);
+  cursor: pointer;
+  padding: 0;
+}
+.eden-dot.active { background: var(--accent-2); }
+
+@media (max-width: 639px) {
+  .eden-carousel-btn { width: 36px; height: 36px; font-size: .95rem; }
+  .eden-carousel-prev { left: .5rem; }
+  .eden-carousel-next { right: .5rem; }
+}
