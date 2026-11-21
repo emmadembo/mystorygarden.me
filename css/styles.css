@@ -1,3 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,200;1,200&family=Questrial&display=swap');
+
+/* Remove the box/shadow around the logo link (and suppress tap highlight) */
+.logo,
+.logo:link,
+.logo:visited,
+.logo:focus,
+.logo:hover,
+.logo:active {
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ================================================================== */
+/* Styles moved out of inline style="" attributes in index.html.        */
+/* They are marked !important and placed at the top on purpose: that    */
+/* matches how inline styles behaved (they beat normal rules, but the   */
+/* !important phone-size fixes further down still win).                 */
+/* ================================================================== */
+.about-title { font-size: 3rem !important; line-height: 1.1 !important; margin-bottom: 1rem !important; text-align: right !important; }
+.about-grid { list-style: none !important; margin: 0 !important; padding: 1rem !important; display: flex !important; gap: 1rem !important; align-items: center !important; }
+.about-photo, .about-text { flex: 1 !important; }
+.photo-container { width: 100% !important; max-width: 420px !important; margin: 0 auto !important; }
+.about-photo img { margin: 0 auto !important; }
+#eden-animation { padding-top: 4rem !important; }
+.eden-title { font-size: 2.5rem !important; line-height: 1.1 !important; margin-bottom: 1rem !important; text-align: left !important; }
+.shop-title { font-size: 2.5rem !important; line-height: 1.1 !important; margin-bottom: 3rem !important; }
+.shop-cards { font-size: 1rem !important; }
+.shop-lead { margin: 0 !important; font-size: 1.5rem !important; line-height: 1.2 !important; font-weight: 600 !important; }
+.shop-spacer { height: clamp(2rem, 6vw, 6rem) !important; }
+.shop-buy { margin: 2rem 0 !important; font-size: 1.2rem !important; line-height: 1.4 !important; }
+.contact-title { font-size: clamp(1.8rem, 5.2vw, 2.8rem) !important; line-height: 1.05 !important; margin-bottom: 1rem !important; }
+.form-hint { margin: 0 0 .5rem !important; font-size: .95rem !important; color: #555 !important; }
+#inquiry-feedback { margin-top: 1rem !important; }
+.inquiry-form .form-actions .btn-primary { border: none !important; box-shadow: none !important; outline: none !important; }
+
 :root{
   /* Colors & surfaces */
   --bg: #f2f1ec;

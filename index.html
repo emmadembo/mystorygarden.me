@@ -2,40 +2,18 @@
 
 <html lang="en">
 <head>
-  <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,200;1,200&family=Questrial&display=swap');
-</style>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>The Story Garden —</title>
-  <style>
-
-  /* Remove the box/shadow around the logo link (and suppress tap highlight) */
-  .logo,
-  .logo:link,
-  .logo:visited,
-  .logo:focus,
-  .logo:hover,
-  .logo:active {
-    background: transparent !important;
-    box-shadow: none !important;
-    outline: none !important;
-    border: none !important;
-    -webkit-tap-highlight-color: transparent;
-  }
-  </style>
 
   <!-- Favicon / App Icons -->
-  <link rel="icon" href="/SG Initial Logo.png" type="image/png" sizes="48x48">
-  <link rel="icon" href="/SG Initial Logo.png" type="image/png" sizes="32x32">
-  <link rel="icon" href="/SG Initial Logo.png" type="image/png" sizes="16x16">
-  <link rel="apple-touch-icon" href="/SG Initial Logo.png" sizes="180x180">
-  <link rel="shortcut icon" href="/SG Initial Logo.png">
+  <link rel="icon" href="images/sg-initial-logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="images/sg-initial-logo.png">
   <meta name="theme-color" content="#ffffff">
-  <link rel="icon" href="/SG Initial Logo.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="/SG Initial Logo.png" type="image/x-icon">
 
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="js/main.js" defer></script>
+  <script src="js/form.js" defer></script>
 </head>
 
 <body>
@@ -48,32 +26,12 @@
         <span></span>
       </button>
       <nav class="nav" id="primary-nav">
-        <a href="#about" aria-label="About section" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'}); closeNav(); return false;">About</a>
-        <a href="#Shop" aria-label="Shop section" onclick="document.getElementById('Shop').scrollIntoView({behavior: 'smooth'}); closeNav(); return false;">Shop</a>
-        <a href="#Contact" class="btn-outline" aria-label="Contact section" onclick="document.getElementById('Contact').scrollIntoView({behavior: 'smooth'}); closeNav(); return false;">Get in touch</a>
+        <a href="#about" aria-label="About section">About</a>
+        <a href="#Shop" aria-label="Shop section">Shop</a>
+        <a href="#Contact" class="btn-outline" aria-label="Contact section">Get in touch</a>
       </nav>
     </div>
   </header>
-
-  <script>
-    function closeNav() {
-      document.querySelector('.nav')?.classList.remove('nav-open');
-      document.querySelector('.nav-toggle')?.setAttribute('aria-expanded', 'false');
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggle = document.querySelector('.nav-toggle');
-      const nav = document.querySelector('.nav');
-      if (!toggle || !nav) return;
-      toggle.addEventListener('click', () => {
-        const isOpen = nav.classList.toggle('nav-open');
-        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      });
-      document.addEventListener('click', (e) => {
-        if (!nav.contains(e.target) && !toggle.contains(e.target)) closeNav();
-      });
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
-    });
-  </script>
 
   <main>
     <!-- Hero -->
@@ -88,15 +46,15 @@
     <section id="about" class="section container">
       <div class="split">
         <div>
-          <h2 style="font-size:3rem; line-height:1.1; margin-bottom:1rem; text-align:right;">About</h2>
-        <ul class="about-grid" style="list-style:none;margin:0rem;padding:1rem;display:flex;gap:1rem;align-items:center;">
-          <li class="about-photo" style="flex:1;">
-            <div class="photo-container" style="width:100%;max-width:420px;margin:0 auto;">
+          <h2 class="about-title">About</h2>
+        <ul class="about-grid">
+          <li class="about-photo">
+            <div class="photo-container">
       <!-- Placeholder image; replace with real photography or 3D viewer -->
-              <img src="Product Market place staging.png" alt="System Design With Plants" style="width: 100%; max-width: 400px; height: auto; display: block; margin: 0 auto;">
+              <img src="images/product-marketplace-staging.png" alt="System Design With Plants">
             </div>
           </li>
-          <li class="about-text" style="flex:1;">
+          <li class="about-text">
             <p>The Story Garden creates systems and spaces that make sustainable growing both practical and visually refined. We combine horticultural science with intentional design to help people grow more efficiently, beautifully, and responsibly.</p>
 
             <p>Our work spans from innovative hydroponic systems like Eden to thoughtfully designed green environments that support learning, creativity, and connection.</p>
@@ -109,23 +67,23 @@
     </section>
 
     <!-- Eden System Construction Animation -->
-    <section id="eden-animation" class="section container" style="padding-top: 4rem;">
+    <section id="eden-animation" class="section container">
       <div class="eden-video-wrap">
-        <h2 style="font-size: 2.5rem; line-height: 1.1; margin-bottom: 1rem; text-align: left;">Coming soon - New to Story Garden</h2>
+        <h2 class="eden-title">Coming soon - New to Story Garden</h2>
 
         <div class="eden-carousel" id="eden-carousel">
           <div class="eden-carousel-track">
 
             <div class="eden-carousel-slide">
               <video class="eden-video" autoplay muted loop playsinline controls preload="metadata">
-                <source src="eden-construction.mp4" type="video/mp4">
+                <source src="media/eden-construction.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
             </div>
 
             <div class="eden-carousel-slide">
               <video class="eden-video" muted loop playsinline controls preload="metadata">
-                <source src="The_Arjuna_System.mp4" type="video/mp4">
+                <source src="media/arjuna-system.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
             </div>
@@ -146,12 +104,12 @@
 
     <!-- Shop -->
     <section id="Shop" class="section container">
-      <h2 style="font-size: 2.5rem; line-height: 1.1; margin-bottom: 3rem;">Shop</h2>
-      <div class="cards" style="font-size: 1rem;">
-        <p style="margin: 0; font-size: 1.5rem; line-height: 1.2; font-weight: 600;">
+      <h2 class="shop-title">Shop</h2>
+      <div class="cards shop-cards">
+        <p class="shop-lead">
           The Eden System is now available for pre-order!</p>
-          <div style="height:clamp(2rem,6vw,6rem);"></div>
-          <p  style="margin: 2rem 0; font-size: 1.2rem; line-height: 1.4;">
+          <div class="shop-spacer"></div>
+          <p class="shop-buy">
 <script async
   src="https://js.stripe.com/v3/buy-button.js">
 </script>
@@ -191,15 +149,13 @@
     <section id="Contact" class="section booking">
       <div class="container booking-inner">
         <div>
-          <h2 style="font-size:clamp(1.8rem,5.2vw,2.8rem); line-height:1.05; margin-bottom:1rem;">Get in Touch!</h2>
+          <h2 class="contact-title">Get in Touch!</h2>
           <p>Questions about our system or wholesale inquiries?</p>
           <p>Send us a message and we’ll be in touch soon.</p>
         </div>
 
-  <!--
-  FORM POSTS JSON to /api/send-email (server). The recipient email is kept on the server
-  and can be changed in the server's environment variables (see server.js/.env below).
-        -->
+  <!-- Form is sent to Formspree by js/form.js (form ID mqagvyaq). -->
+
         <form id="inquiry-form" class="inquiry-form" action="https://formspree.io/f/mqagvyaq" method="POST" novalidate>
           <fieldset>
             <legend>Contact Information (required)</legend>
@@ -227,7 +183,7 @@
 
           <fieldset>
             <legend>Business (optional)</legend>
-            <p style="margin:0 0 .5rem; font-size:.95rem; color:#555;">
+            <p class="form-hint">
               Fill this section if you're contacting on behalf of a business or for wholesale/partnerships.
             </p>
 
@@ -256,154 +212,11 @@
           </fieldset>
 
           <div class="form-actions">
-            <button type="submit" class="btn-primary" style="border: none !important; box-shadow: none !important; outline: none !important;">Send inquiry</button>
+            <button type="submit" class="btn-primary">Send inquiry</button>
           </div>
         </form>
 
-        <div id="inquiry-feedback" aria-live="polite" style="margin-top:1rem;"></div>
-
-        <script>
-  // FORM SUBMISSION HANDLING
-  // Client: submit form JSON to Formspree.
-  const SEND_ENDPOINT = 'https://formspree.io/f/mqagvyaq';
-
-  function feedbackMessage(text, color = '') {
-    const el = document.getElementById('inquiry-feedback');
-    if (!el) return;
-    el.style.color = color;
-    el.textContent = text;
-  }
-
-  document.getElementById('inquiry-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const data = Object.fromEntries(new FormData(form).entries());
-    const btn = form.querySelector('button[type="submit"]');
-
-    if (btn) {
-      btn.disabled = true;
-      btn.textContent = 'Sending…';
-    }
-    feedbackMessage('', '');
-
-    try {
-      // Use AbortController for a simple timeout
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
-
-      // Ask for JSON response and use CORS mode
-      const res = await fetch(SEND_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(data),
-        signal: controller.signal,
-        mode: 'cors'
-      });
-
-      clearTimeout(timeoutId);
-
-      if (!res.ok) {
-        let details = '';
-        try { details = await res.text(); } catch (_) {}
-        throw new Error('Server responded with ' + res.status + (details ? ': ' + details : ''));
-      }
-
-      // show inline thank-you message replacing the form
-      const formEl = document.getElementById('inquiry-form');
-      const container = formEl.parentNode;
-      const section = document.getElementById('Contact') || formEl.closest('.booking') || formEl.closest('section');
-      const refText = section ? section.querySelector('p') : document.querySelector('p') || document.querySelector('h2');
-      const refStyle = refText ? window.getComputedStyle(refText) : null;
-
-      const rect = formEl.getBoundingClientRect();
-      const thank = document.createElement('div');
-      thank.setAttribute('role', 'status');
-      thank.setAttribute('aria-live', 'polite');
-
-      // preserve frame shape/size
-      thank.style.minWidth = '100%';
-      thank.style.width = '100%';
-      thank.style.maxWidth = '100%';
-      thank.style.boxSizing = 'border-box';
-      thank.style.whiteSpace = 'normal';
-      thank.style.wordBreak = 'break-word';
-      thank.style.wordWrap = 'break-word';
-      thank.style.minHeight = rect.height + 'px';
-
-      // center message
-      thank.style.display = 'flex';
-      thank.style.alignItems = 'center';
-      thank.style.justifyContent = 'center';
-      thank.style.textAlign = 'center';
-
-      const msg = document.createElement('h2');
-      msg.textContent = "Thanks — we'll be in touch soon!";
-      msg.style.margin = '0';
-      thank.appendChild(msg);
-
-      // copy visual styles from form
-      const formStyle = window.getComputedStyle(formEl);
-      if (formStyle.backgroundColor) thank.style.background = formStyle.backgroundColor;
-      if (formStyle.border) thank.style.border = formStyle.border;
-      if (formStyle.borderRadius) thank.style.borderRadius = formStyle.borderRadius;
-      if (formStyle.boxShadow) thank.style.boxShadow = formStyle.boxShadow;
-      thank.style.paddingTop = formStyle.paddingTop;
-      thank.style.paddingRight = formStyle.paddingRight;
-      thank.style.paddingBottom = formStyle.paddingBottom;
-      thank.style.paddingLeft = formStyle.paddingLeft;
-      thank.style.boxSizing = 'border-box';
-      thank.style.display = formStyle.display || 'block';
-      thank.style.width = formStyle.width && formStyle.width !== 'auto' ? formStyle.width : '100%';
-
-      if (refStyle) {
-        thank.style.fontFamily = refStyle.fontFamily;
-        thank.style.fontSize = refStyle.fontSize;
-        thank.style.lineHeight = refStyle.lineHeight;
-        thank.style.fontWeight = refStyle.fontWeight;
-        thank.style.margin = refStyle.margin;
-        thank.style.textAlign = refStyle.textAlign;
-      }
-
-      container.replaceChild(thank, formEl);
-      formEl.reset();
-
-    } catch (err) {
-      console.error('Send error:', err);
-
-      // Mailto fallback: open user's email client with a prefilled message
-      try {
-        const subject = `Inquiry from ${data.name || 'website'}`;
-        const bodyLines = [
-          `Name: ${data.name || ''}`,
-          `Email: ${data.email || ''}`,
-          `Company: ${data.company || ''}`,
-          `Inquiry type: ${data.inquiry_type || ''}`,
-          `Product: ${data.product || ''}`,
-          `Preferred date: ${data.date || ''}`,
-          `Quantity: ${data.quantity || ''}`,
-          '',
-          data.message || ''
-        ];
-
-        feedbackMessage('Could not send via server — opening your email client as a fallback.', 'crimson');
-
-        const mailto = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
-        window.location.href = mailto;
-      } catch (mailtoErr) {
-        console.error('Fallback mailto error:', mailtoErr);
-        feedbackMessage('There was an error sending your message. Please try again later.', 'crimson');
-      }
-    } finally {
-      if (btn) {
-        btn.disabled = false;
-        btn.textContent = 'Send inquiry';
-      }
-    }
-  });
-        </script>
+        <div id="inquiry-feedback" aria-live="polite"></div>
       </div>
     </section>
 
@@ -412,45 +225,5 @@
       <p>© <span id="year"></span> The Story Garden — Grow your Story.</p>
     </div>
   </footer>
-
-  <script>
-    // small niceties
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-
-  <script>
-    (function initEdenCarousel() {
-      const carousel = document.getElementById('eden-carousel');
-      if (!carousel) return;
-
-      const track = carousel.querySelector('.eden-carousel-track');
-      const slides = carousel.querySelectorAll('.eden-carousel-slide');
-      const dots = carousel.querySelectorAll('.eden-dot');
-      const prevBtn = carousel.querySelector('.eden-carousel-prev');
-      const nextBtn = carousel.querySelector('.eden-carousel-next');
-
-      let index = 0;
-
-      function goTo(i) {
-        index = (i + slides.length) % slides.length;
-        track.style.transform = `translateX(-${index * 100}%)`;
-        dots.forEach((d, di) => d.classList.toggle('active', di === index));
-
-        carousel.querySelectorAll('video').forEach((v, vi) => {
-          if (vi === index) {
-            v.play().catch(() => {});
-          } else {
-            v.pause();
-          }
-        });
-      }
-
-      prevBtn.addEventListener('click', () => goTo(index - 1));
-      nextBtn.addEventListener('click', () => goTo(index + 1));
-      dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
-
-      goTo(0);
-    })();
-  </script>
 </body>
 </html>
