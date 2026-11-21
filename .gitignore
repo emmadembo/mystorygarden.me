@@ -6,3 +6,7 @@ BloomingColorsLOGO.jpg
 # Stripe downloads: not used by the site, never commit
 stripe
 stripe-java-30.0.0.zip
+
+# Redesign reference build (temporary, deleted after the redesign is merged)
+redesign-reference/
+redesign-reference.zip

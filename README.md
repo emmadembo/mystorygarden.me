@@ -7,11 +7,13 @@ It's a plain static site (HTML, CSS and JavaScript), with no build step.
 
 ```
 index.html        the page
-css/styles.css    all styling
-js/main.js        menu, smooth scrolling, video carousel, footer year
+favicon.svg       browser-tab icon
+css/styles.css    all styling (colors and fonts are at the top, under :root)
+js/main.js        footer year, wholesale auto-open, reduced-motion video pause
+js/reveal.js      fade-up animations on scroll
 js/form.js        sends the contact form to Formspree
 images/           photos and logo (lowercase-hyphenated names, no spaces)
-media/            videos
+media/            videos and their poster images
 ```
 
 ## Preview on your computer

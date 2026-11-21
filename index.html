@@ -1,229 +1,242 @@
 <!doctype html>
-
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Story Garden —</title>
-
-  <!-- Favicon / App Icons -->
-  <link rel="icon" href="images/sg-initial-logo.png" type="image/png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Story Garden — Living vessels for everyday spaces</title>
+  <meta name="description" content="The Story Garden designs sculptural hydroponic systems that make sustainable growing both practical and visually refined.">
+  <meta name="theme-color" content="#F2F0EB">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="images/sg-initial-logo.png">
-  <meta name="theme-color" content="#ffffff">
 
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,200;0,300;0,400;1,200;1,300&family=Jost:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- reveal.js runs right away (not deferred) so content never flashes before fading in -->
+  <script src="js/reveal.js"></script>
   <script src="js/main.js" defer></script>
   <script src="js/form.js" defer></script>
+  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </head>
-
 <body>
+
+  <!-- ============ HEADER ============ -->
   <header class="site-header">
     <div class="container header-inner">
-      <a class="logo" href="#">The Story Garden</a>
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-nav">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <nav class="nav" id="primary-nav">
-        <a href="#about" aria-label="About section">About</a>
-        <a href="#Shop" aria-label="Shop section">Shop</a>
-        <a href="#Contact" class="btn-outline" aria-label="Contact section">Get in touch</a>
+      <a href="#top" class="logo">The Story Garden</a>
+      <nav class="main-nav" aria-label="Main">
+        <a class="ulink" href="#about">About</a>
+        <a class="ulink" href="#systems">Systems</a>
+        <a class="ulink" href="#shop">Shop</a>
+        <a class="btn btn-line btn-small" href="#contact">Get in touch</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-text">
+
+    <!-- ============ HERO ============ -->
+    <section id="top" class="container hero">
+      <div class="hero-text">
+        <p class="eyebrow load">Living vessels for everyday spaces</p>
+        <h1 class="hero-title">
+          <span class="load d1">Grow your</span>
+          <span class="load d2 indent"><em>story.</em></span>
+        </h1>
+        <p class="lead load d3">Systems and spaces that make sustainable growing both practical and visually refined — where horticultural science meets intentional design.</p>
+        <div class="hero-ctas load d4">
+          <a class="btn btn-solid" href="#shop">Pre-order Eden</a>
+          <a class="ulink link-arrow" href="#systems">Explore the systems
+            <svg aria-hidden="true" width="18" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 5h16M12 1l4 4-4 4"/></svg>
+          </a>
         </div>
+      </div>
+      <div class="hero-media zoom">
+        <img class="zi drift" src="images/eden-hero.jpg" alt="The Eden System growing leafy greens in a calm, neutral living room">
       </div>
     </section>
 
-    <!-- About -->
-    <section id="about" class="section container">
-      <div class="split">
-        <div>
-          <h2 class="about-title">About</h2>
-        <ul class="about-grid">
-          <li class="about-photo">
-            <div class="photo-container">
-      <!-- Placeholder image; replace with real photography or 3D viewer -->
-              <img src="images/product-marketplace-staging.png" alt="System Design With Plants">
-            </div>
-          </li>
-          <li class="about-text">
-            <p>The Story Garden creates systems and spaces that make sustainable growing both practical and visually refined. We combine horticultural science with intentional design to help people grow more efficiently, beautifully, and responsibly.</p>
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Horticultural science</span><i></i><span>Intentional design</span><i></i><span>Sustainable growing</span><i></i><span>Grow your story</span><i></i>
+        <span>Horticultural science</span><i></i><span>Intentional design</span><i></i><span>Sustainable growing</span><i></i><span>Grow your story</span><i></i>
+      </div>
+    </div>
 
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="container section about">
+      <div class="row-label">
+        <p class="label reveal">01 — About</p>
+        <h2 class="statement reveal">We create systems and spaces that make sustainable growing <em>both practical and visually refined.</em></h2>
+      </div>
+      <div class="row-label">
+        <div class="spacer"></div>
+        <div class="body-cols">
+          <div class="reveal">
+            <p>We combine horticultural science with intentional design to help people grow more efficiently, beautifully, and responsibly.</p>
             <p>Our work spans from innovative hydroponic systems like Eden to thoughtfully designed green environments that support learning, creativity, and connection.</p>
-
+          </div>
+          <div class="reveal">
             <p>At its core, The Story Garden is about integrating nature into everyday life — with methods that are smart, sustainable, and built to last.</p>
-          </li>
-        </ul>
+            <a class="ulink small-caps" href="#contact">Our story</a>
+          </div>
         </div>
+      </div>
+      <div class="photo-pair">
+        <div class="photo reveal zoom"><img class="zi" src="images/eden-living-room.jpg" alt="The Eden System standing beside a sofa and marble table" loading="lazy"></div>
+        <div class="photo photo-offset reveal zoom"><img class="zi" src="images/eden-on-linen.jpg" alt="The Eden System vessel on a wooden stool draped in linen" loading="lazy"></div>
       </div>
     </section>
 
-    <!-- Eden System Construction Animation -->
-    <section id="eden-animation" class="section container">
-      <div class="eden-video-wrap">
-        <h2 class="eden-title">Coming soon - New to Story Garden</h2>
+    <!-- ============ SYSTEMS ============ -->
+    <section id="systems" class="dark">
+      <div class="container section">
+        <div class="systems-head">
+          <div>
+            <p class="label reveal">02 — The Systems</p>
+            <h2 class="title reveal">Designed to be <em>lived with.</em></h2>
+          </div>
+          <p class="systems-intro reveal">Sculptural hydroponic vessels that grow food and greenery indoors — quietly, beautifully, and with no soil.</p>
+        </div>
 
-        <div class="eden-carousel" id="eden-carousel">
-          <div class="eden-carousel-track">
-
-            <div class="eden-carousel-slide">
-              <video class="eden-video" autoplay muted loop playsinline controls preload="metadata">
-                <source src="media/eden-construction.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
+        <div class="systems-grid">
+          <article class="system-card reveal">
+            <a href="#shop" class="video-frame zoom" aria-label="The Eden System — go to shop">
+              <video class="zi" src="media/eden.mp4" poster="media/eden-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
+              <span class="pill pill-accent">Pre-order</span>
+            </a>
+            <div class="card-title-row">
+              <h3>The Eden System</h3>
+              <span class="price">$375</span>
             </div>
-
-            <div class="eden-carousel-slide">
-              <video class="eden-video" muted loop playsinline controls preload="metadata">
-                <source src="media/arjuna-system.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
+            <div class="card-meta">
+              <span>Hydroponic · 12-part kit</span>
+              <a class="ulink" href="#shop">View system</a>
             </div>
+          </article>
 
-          </div>
+          <article class="system-card reveal">
+            <div class="video-frame zoom">
+              <video class="zi" src="media/arjuna.mp4" poster="media/arjuna-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
+              <span class="pill pill-dark">Coming soon</span>
+            </div>
+            <div class="card-title-row">
+              <h3>The Arjuna System</h3>
+              <span class="price">—</span>
+            </div>
+            <div class="card-meta">
+              <span>Pump-free countertop garden</span>
+              <a class="ulink" href="#contact">Join the waitlist</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-          <button class="eden-carousel-btn eden-carousel-prev" aria-label="Previous video">&#10094;</button>
-          <button class="eden-carousel-btn eden-carousel-next" aria-label="Next video">&#10095;</button>
-
-          <div class="eden-carousel-dots">
-            <button class="eden-dot active" data-slide="0" aria-label="Go to video 1"></button>
-            <button class="eden-dot" data-slide="1" aria-label="Go to The Arjuna System video"></button>
+    <!-- ============ SHOP ============ -->
+    <section id="shop" class="stone">
+      <div class="container section shop">
+        <div class="shop-media zoom reveal">
+          <img class="zi" src="images/eden-with-plants.png" alt="The Eden System with leafy greens growing from each pocket" loading="lazy">
+        </div>
+        <div class="shop-info reveal">
+          <p class="label">03 — Shop · Now available for pre-order</p>
+          <h2 class="title-xl">The Eden <em>System</em></h2>
+          <p class="shop-price">$375</p>
+          <p class="body">A sculptural hydroponic vessel with a built-in pump that sits on the tank floor and lifts water up the riser. It arrives as a 12-part kit and assembles at home.</p>
+          <dl class="specs">
+            <dt>Growing</dt><dd>Hydroponic</dd>
+            <dt>In the box</dt><dd>12 parts</dd>
+            <dt>Ships</dt><dd>[Ship date]</dd>
+          </dl>
+          <!-- Stripe buy button (its look is set in the Stripe Dashboard). To use an
+               on-brand button instead, swap this for:
+               <a class="btn btn-solid btn-wide" href="YOUR_STRIPE_PAYMENT_LINK">Pre-order — $375</a> -->
+          <div class="shop-buy">
+            <stripe-buy-button
+              buy-button-id="buy_btn_1SemoWHc2AAY1TvmlBOcxnxD"
+              publishable-key="pk_live_51SHEFaHc2AAY1TvmzJrTmD0Wj8fETPzNzvJ4tkPePrJiSfOil6bx8vVD2Cy7ARHsRGxr18rGKPSCZDZy80tMgiLK00CEVKXX4C"
+            >
+            </stripe-buy-button>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- Shop -->
-    <section id="Shop" class="section container">
-      <h2 class="shop-title">Shop</h2>
-      <div class="cards shop-cards">
-        <p class="shop-lead">
-          The Eden System is now available for pre-order!</p>
-          <div class="shop-spacer"></div>
-          <p class="shop-buy">
-<script async
-  src="https://js.stripe.com/v3/buy-button.js">
-</script>
-
-<stripe-buy-button
-  buy-button-id="buy_btn_1SemoWHc2AAY1TvmlBOcxnxD"
-  publishable-key="pk_live_51SHEFaHc2AAY1TvmzJrTmD0Wj8fETPzNzvJ4tkPePrJiSfOil6bx8vVD2Cy7ARHsRGxr18rGKPSCZDZy80tMgiLK00CEVKXX4C"
->
-</stripe-buy-button>
-
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="container section contact">
+      <div class="contact-intro reveal">
+        <p class="label">04 — Get in touch</p>
+        <h2 class="title-xl">Tell us <em>your story.</em></h2>
+        <p class="body">Questions about our systems or wholesale inquiries? Send us a message and we'll be in touch soon.</p>
       </div>
-      <!-- Cards   
-       <article class="card">
-          <h4>Greenroom (Main)</h4>
-          <p class="price">$350/hr</p>
-          <p class="desc">Sunlit central room with 40–60 seating, mobile greenhouse wall, and AV hookups.</p>
-          <a class="card-cta" href="#book">Book Greenroom</a>
-        </article>
 
-        <article class="card">
-          <h4>Studio Nook</h4>
-          <p class="price">$150/hr</p>
-          <p class="desc">Cozy space for headshots, meetings, and small workshops (up to 12).</p>
-          <a class="card-cta" href="#book">Book Studio Nook</a>
-        </article>
-
-        <article class="card">
-          <h4>Courtyard</h4>
-          <p class="price">$250/hr</p>
-          <p class="desc">Outdoor-inspired courtyard with potted trees — great for receptions and cocktails.</p>
-          <a class="card-cta" href="#book">Book Courtyard</a>
-        </article>
-      </div>-->
-    </section>
-
-  <!-- Contact -->
-    <section id="Contact" class="section booking">
-      <div class="container booking-inner">
-        <div>
-          <h2 class="contact-title">Get in Touch!</h2>
-          <p>Questions about our system or wholesale inquiries?</p>
-          <p>Send us a message and we’ll be in touch soon.</p>
+      <!-- Sent to Formspree by js/form.js. Keep the form ID and field names as they are. -->
+      <form id="inquiry-form" class="contact-form reveal" action="https://formspree.io/f/mqagvyaq" method="POST">
+        <div class="field-row">
+          <label class="field-label">Full name
+            <input class="field" type="text" name="name" placeholder="Your name" autocomplete="name" required>
+          </label>
+          <label class="field-label">Email
+            <input class="field" type="email" name="email" placeholder="you@email.com" autocomplete="email" required>
+          </label>
         </div>
 
-  <!-- Form is sent to Formspree by js/form.js (form ID mqagvyaq). -->
-
-        <form id="inquiry-form" class="inquiry-form" action="https://formspree.io/f/mqagvyaq" method="POST" novalidate>
-          <fieldset>
-            <legend>Contact Information (required)</legend>
-
-            <label>
-              Full name
-              <input type="text" name="name" required />
-            </label>
-
-            <label>
-              Email
-              <input type="email" name="email" required />
-            </label>
-
-            <label>
-              Inquiry type
-              <select name="inquiry_type" required>
-                <option value="">Select…</option>
-                <option value="general">General question</option>
-                <option value="system">Product demo / System inquiry</option>
-                <option value="wholesale">Wholesale / Partnership</option>
-              </select>
-            </label>
-          </fieldset>
-
-          <fieldset>
-            <legend>Business (optional)</legend>
-            <p class="form-hint">
-              Fill this section if you're contacting on behalf of a business or for wholesale/partnerships.
-            </p>
-
-            <label>
-              Company / Business (optional)
-              <input type="text" name="company" placeholder="Your business or organization name" />
-            </label>
-
-            <label>
-              Estimated quantity (for wholesale, optional)
-              <input type="number" name="quantity" min="1" max="10000" />
-            </label>
-
-            <label>
-              Preferred date (optional)
-              <input type="date" name="date" />
-            </label>
-          </fieldset>
-
-          <fieldset>
-            <legend>Message</legend>
-            <label>
-              Tell us your story!
-              <textarea name="message" placeholder="What would you like to share with us?" rows="5"></textarea>
-            </label>
-          </fieldset>
-
-          <div class="form-actions">
-            <button type="submit" class="btn-primary">Send inquiry</button>
+        <fieldset class="chips">
+          <legend class="field-label">I'm reaching out about</legend>
+          <div class="chip-row">
+            <label class="chip"><input type="radio" name="inquiry_type" value="general" checked><span>General question</span></label>
+            <label class="chip"><input type="radio" name="inquiry_type" value="system"><span>Product demo / system inquiry</span></label>
+            <label class="chip"><input type="radio" name="inquiry_type" value="wholesale"><span>Wholesale / partnership</span></label>
           </div>
-        </form>
+        </fieldset>
 
-        <div id="inquiry-feedback" aria-live="polite"></div>
-      </div>
+        <details class="biz" id="biz">
+          <summary><span class="plus" aria-hidden="true"></span>Inquiring for a business or wholesale?</summary>
+          <div class="field-row">
+            <label class="field-label">Company
+              <input class="field" type="text" name="company" placeholder="Business or organization" autocomplete="organization">
+            </label>
+            <label class="field-label field-sm">Est. quantity
+              <input class="field" type="number" name="quantity" min="1" max="10000" placeholder="e.g. 20">
+            </label>
+            <label class="field-label field-sm">Preferred date
+              <input class="field" type="date" name="date">
+            </label>
+          </div>
+        </details>
+
+        <label class="field-label">Message
+          <textarea class="field" name="message" rows="4" placeholder="What would you like to share with us?"></textarea>
+        </label>
+
+        <button type="submit" class="btn btn-line btn-arrow">Send inquiry
+          <svg aria-hidden="true" width="18" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M0 5h16M12 1l4 4-4 4"/></svg>
+        </button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
     </section>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>© <span id="year"></span> The Story Garden — Grow your Story.</p>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="dark">
+    <div class="container footer-inner">
+      <p class="footer-big reveal">Grow your <em>Story.</em></p>
+      <div class="footer-bar">
+        <nav aria-label="Footer">
+          <a class="ulink" href="#about">About</a>
+          <a class="ulink" href="#systems">Systems</a>
+          <a class="ulink" href="#shop">Shop</a>
+          <a class="ulink" href="#contact">Contact</a>
+        </nav>
+        <span class="muted">© <span id="year">2026</span> The Story Garden</span>
+      </div>
     </div>
   </footer>
+
 </body>
 </html>
