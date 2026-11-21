@@ -1,46 +1,86 @@
 <!doctype html>
+
 <html lang="en">
 <head>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,200;1,200&family=Questrial&display=swap');
+</style>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Story Garden — Event Venue & Plant Studio</title>
+  <title>The Story Garden —</title>
+  <style>
+
+  /* Remove the box/shadow around the logo link (and suppress tap highlight) */
+  .logo,
+  .logo:link,
+  .logo:visited,
+  .logo:focus,
+  .logo:hover,
+  .logo:active {
+    background: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+  </style>
+
+  <!-- Favicon / App Icons -->
+  <link rel="icon" href="/SG Initial Logo.png" type="image/png" sizes="48x48">
+  <link rel="icon" href="/SG Initial Logo.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="/SG Initial Logo.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="/SG Initial Logo.png" sizes="180x180">
+  <link rel="shortcut icon" href="/SG Initial Logo.png">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="/SG Initial Logo.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/SG Initial Logo.png" type="image/x-icon">
+
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="#">The Story Garden</a>
-      <nav class="nav">
-        <a href="#about">About</a>
-        <a href="#spaces">Spaces</a>
-        <a href="#book">Book</a>
-        <a href="#contact" class="btn-outline">Contact</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav" id="primary-nav">
+        <a href="#about" aria-label="About section" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'}); closeNav(); return false;">About</a>
+        <a href="#Shop" aria-label="Shop section" onclick="document.getElementById('Shop').scrollIntoView({behavior: 'smooth'}); closeNav(); return false;">Shop</a>
+        <a href="#Contact" class="btn-outline" aria-label="Contact section" onclick="document.getElementById('Contact').scrollIntoView({behavior: 'smooth'}); closeNav(); return false;">Get in touch</a>
       </nav>
     </div>
   </header>
+
+  <script>
+    function closeNav() {
+      document.querySelector('.nav')?.classList.remove('nav-open');
+      document.querySelector('.nav-toggle')?.setAttribute('aria-expanded', 'false');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.querySelector('.nav');
+      if (!toggle || !nav) return;
+      toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('nav-open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+      document.addEventListener('click', (e) => {
+        if (!nav.contains(e.target) && !toggle.contains(e.target)) closeNav();
+      });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
+    });
+  </script>
 
   <main>
     <!-- Hero -->
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-text">
-          <h1>Host your story in a living space</h1>
-          <p class="lead">
-            An elegant, plant-filled venue for workshops, product shoots, intimate gatherings, and creative events. Natural light, curated greenery, and effortless service.
-          </p>
-          <p class="meta">
-            Seats up to <strong>60</strong> • In-house plant styling • Catering-friendly
-          </p>
-          <div class="hero-cta">
-            <a href="#book" class="btn-primary">Check availability</a>
-            <a href="#spaces" class="btn-link">View spaces</a>
-          </div>
         </div>
-
-        <figure class="hero-photo" aria-hidden="true">
-          <!-- Placeholder image; replace with real photography -->
-          <div class="photo-placeholder">Photo</div>
-        </figure>
       </div>
     </section>
 
@@ -48,25 +88,83 @@
     <section id="about" class="section container">
       <div class="split">
         <div>
-          <h2>What we offer</h2>
-          <ul class="features">
-            <li>Beautiful plant installations & seasonal styling</li>
-            <li>Flexible layouts for meetings, classes, and private events</li>
-            <li>Audio/visual setup, catering partnerships, on-site coordinator</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Perfect for</h3>
-          <p>Creative professionals, product shoots, workshops, intimate weddings, brand activations, and photoshoots.</p>
+          <h2 style="font-size:3rem; line-height:1.1; margin-bottom:1rem; text-align:right;">About</h2>
+        <ul class="about-grid" style="list-style:none;margin:0rem;padding:1rem;display:flex;gap:1rem;align-items:center;">
+          <li class="about-photo" style="flex:1;">
+            <div class="photo-container" style="width:100%;max-width:420px;margin:0 auto;">
+      <!-- Placeholder image; replace with real photography or 3D viewer -->
+              <img src="Product Market place staging.png" alt="System Design With Plants" style="width: 100%; max-width: 400px; height: auto; display: block; margin: 0 auto;">
+            </div>
+          </li>
+          <li class="about-text" style="flex:1;">
+            <p>The Story Garden creates systems and spaces that make sustainable growing both practical and visually refined. We combine horticultural science with intentional design to help people grow more efficiently, beautifully, and responsibly.</p>
+
+            <p>Our work spans from innovative hydroponic systems like Eden to thoughtfully designed green environments that support learning, creativity, and connection.</p>
+
+            <p>At its core, The Story Garden is about integrating nature into everyday life — with methods that are smart, sustainable, and built to last.</p>
+          </li>
+        </ul>
         </div>
       </div>
     </section>
 
-    <!-- Spaces -->
-    <section id="spaces" class="section container">
-      <h2>Spaces & pricing</h2>
-      <div class="cards">
-        <article class="card">
+    <!-- Eden System Construction Animation -->
+    <section id="eden-animation" class="section container" style="padding-top: 4rem;">
+      <div class="eden-video-wrap">
+        <h2 style="font-size: 2.5rem; line-height: 1.1; margin-bottom: 1rem; text-align: left;">Coming soon - New to Story Garden</h2>
+
+        <div class="eden-carousel" id="eden-carousel">
+          <div class="eden-carousel-track">
+
+            <div class="eden-carousel-slide">
+              <video class="eden-video" autoplay muted loop playsinline controls preload="metadata">
+                <source src="eden-construction.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+
+            <div class="eden-carousel-slide">
+              <video class="eden-video" muted loop playsinline controls preload="metadata">
+                <source src="The_Arjuna_System.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+
+          </div>
+
+          <button class="eden-carousel-btn eden-carousel-prev" aria-label="Previous video">&#10094;</button>
+          <button class="eden-carousel-btn eden-carousel-next" aria-label="Next video">&#10095;</button>
+
+          <div class="eden-carousel-dots">
+            <button class="eden-dot active" data-slide="0" aria-label="Go to video 1"></button>
+            <button class="eden-dot" data-slide="1" aria-label="Go to The Arjuna System video"></button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Shop -->
+    <section id="Shop" class="section container">
+      <h2 style="font-size: 2.5rem; line-height: 1.1; margin-bottom: 3rem;">Shop</h2>
+      <div class="cards" style="font-size: 1rem;">
+        <p style="margin: 0; font-size: 1.5rem; line-height: 1.2; font-weight: 600;">
+          The Eden System is now available for pre-order!</p>
+          <div style="height:clamp(2rem,6vw,6rem);"></div>
+          <p  style="margin: 2rem 0; font-size: 1.2rem; line-height: 1.4;">
+<script async
+  src="https://js.stripe.com/v3/buy-button.js">
+</script>
+
+<stripe-buy-button
+  buy-button-id="buy_btn_1SemoWHc2AAY1TvmlBOcxnxD"
+  publishable-key="pk_live_51SHEFaHc2AAY1TvmzJrTmD0Wj8fETPzNzvJ4tkPePrJiSfOil6bx8vVD2Cy7ARHsRGxr18rGKPSCZDZy80tMgiLK00CEVKXX4C"
+>
+</stripe-buy-button>
+
+      </div>
+      <!-- Cards   
+       <article class="card">
           <h4>Greenroom (Main)</h4>
           <p class="price">$350/hr</p>
           <p class="desc">Sunlit central room with 40–60 seating, mobile greenhouse wall, and AV hookups.</p>
@@ -86,81 +184,273 @@
           <p class="desc">Outdoor-inspired courtyard with potted trees — great for receptions and cocktails.</p>
           <a class="card-cta" href="#book">Book Courtyard</a>
         </article>
-      </div>
+      </div>-->
     </section>
 
-    <!-- Quick booking -->
-    <section id="book" class="section booking">
+  <!-- Contact -->
+    <section id="Contact" class="section booking">
       <div class="container booking-inner">
         <div>
-          <h2>Quick inquiry</h2>
-          <p>Tell us your date, headcount, and a short note — we’ll reply within 24 hours.</p>
+          <h2 style="font-size:clamp(1.8rem,5.2vw,2.8rem); line-height:1.05; margin-bottom:1rem;">Get in Touch!</h2>
+          <p>Questions about our system or wholesale inquiries?</p>
+          <p>Send us a message and we’ll be in touch soon.</p>
         </div>
 
-        <form class="inquiry-form" action="#" method="post" onsubmit="alert('Form demo — replace action with your booking backend'); return false;">
-          <label>
-            Full name
-            <input type="text" name="name" required />
-          </label>
+  <!--
+  FORM POSTS JSON to /api/send-email (server). The recipient email is kept on the server
+  and can be changed in the server's environment variables (see server.js/.env below).
+        -->
+        <form id="inquiry-form" class="inquiry-form" action="https://formspree.io/f/mqagvyaq" method="POST" novalidate>
+          <fieldset>
+            <legend>Contact Information (required)</legend>
 
-          <label>
-            Email
-            <input type="email" name="email" required />
-          </label>
+            <label>
+              Full name
+              <input type="text" name="name" required />
+            </label>
 
-          <label>
-            Preferred date
-            <input type="date" name="date" required />
-          </label>
+            <label>
+              Email
+              <input type="email" name="email" required />
+            </label>
 
-          <label>
-            Guests
-            <input type="number" name="guests" min="1" max="500" value="20" />
-          </label>
+            <label>
+              Inquiry type
+              <select name="inquiry_type" required>
+                <option value="">Select…</option>
+                <option value="general">General question</option>
+                <option value="system">Product demo / System inquiry</option>
+                <option value="wholesale">Wholesale / Partnership</option>
+              </select>
+            </label>
+          </fieldset>
 
-          <label>
-            Message
-            <textarea name="message" placeholder="Tell us about your event"></textarea>
-          </label>
+          <fieldset>
+            <legend>Business (optional)</legend>
+            <p style="margin:0 0 .5rem; font-size:.95rem; color:#555;">
+              Fill this section if you're contacting on behalf of a business or for wholesale/partnerships.
+            </p>
+
+            <label>
+              Company / Business (optional)
+              <input type="text" name="company" placeholder="Your business or organization name" />
+            </label>
+
+            <label>
+              Estimated quantity (for wholesale, optional)
+              <input type="number" name="quantity" min="1" max="10000" />
+            </label>
+
+            <label>
+              Preferred date (optional)
+              <input type="date" name="date" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Message</legend>
+            <label>
+              Tell us your story!
+              <textarea name="message" placeholder="What would you like to share with us?" rows="5"></textarea>
+            </label>
+          </fieldset>
 
           <div class="form-actions">
-            <button type="submit" class="btn-primary">Send inquiry</button>
-            <a href="#contact" class="btn-link">Contact coordinator</a>
+            <button type="submit" class="btn-primary" style="border: none !important; box-shadow: none !important; outline: none !important;">Send inquiry</button>
           </div>
         </form>
-      </div>
-    </section>
 
-    <!-- Contact -->
-    <section id="contact" class="section container contact">
-      <div class="split">
-        <div>
-          <h3>Visit or say hello</h3>
-          <p><strong>Address:</strong> 123 Green Lane, Dallas, TX</p>
-          <p><strong>Phone:</strong> (555) 555-5555</p>
-          <p><strong>Email:</strong> events@thestorygarden.example</p>
-        </div>
-        <div>
-          <h3>Social</h3>
-          <p>Follow for behind-the-scenes styling and availability updates.</p>
-          <div class="social">
-            <a href="#" aria-label="Instagram">Instagram</a>
-            <a href="#" aria-label="Pinterest">Pinterest</a>
-          </div>
-        </div>
+        <div id="inquiry-feedback" aria-live="polite" style="margin-top:1rem;"></div>
+
+        <script>
+  // FORM SUBMISSION HANDLING
+  // Client: submit form JSON to Formspree.
+  const SEND_ENDPOINT = 'https://formspree.io/f/mqagvyaq';
+
+  function feedbackMessage(text, color = '') {
+    const el = document.getElementById('inquiry-feedback');
+    if (!el) return;
+    el.style.color = color;
+    el.textContent = text;
+  }
+
+  document.getElementById('inquiry-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const data = Object.fromEntries(new FormData(form).entries());
+    const btn = form.querySelector('button[type="submit"]');
+
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+    }
+    feedbackMessage('', '');
+
+    try {
+      // Use AbortController for a simple timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+
+      // Ask for JSON response and use CORS mode
+      const res = await fetch(SEND_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data),
+        signal: controller.signal,
+        mode: 'cors'
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!res.ok) {
+        let details = '';
+        try { details = await res.text(); } catch (_) {}
+        throw new Error('Server responded with ' + res.status + (details ? ': ' + details : ''));
+      }
+
+      // show inline thank-you message replacing the form
+      const formEl = document.getElementById('inquiry-form');
+      const container = formEl.parentNode;
+      const section = document.getElementById('Contact') || formEl.closest('.booking') || formEl.closest('section');
+      const refText = section ? section.querySelector('p') : document.querySelector('p') || document.querySelector('h2');
+      const refStyle = refText ? window.getComputedStyle(refText) : null;
+
+      const rect = formEl.getBoundingClientRect();
+      const thank = document.createElement('div');
+      thank.setAttribute('role', 'status');
+      thank.setAttribute('aria-live', 'polite');
+
+      // preserve frame shape/size
+      thank.style.minWidth = '100%';
+      thank.style.width = '100%';
+      thank.style.maxWidth = '100%';
+      thank.style.boxSizing = 'border-box';
+      thank.style.whiteSpace = 'normal';
+      thank.style.wordBreak = 'break-word';
+      thank.style.wordWrap = 'break-word';
+      thank.style.minHeight = rect.height + 'px';
+
+      // center message
+      thank.style.display = 'flex';
+      thank.style.alignItems = 'center';
+      thank.style.justifyContent = 'center';
+      thank.style.textAlign = 'center';
+
+      const msg = document.createElement('h2');
+      msg.textContent = "Thanks — we'll be in touch soon!";
+      msg.style.margin = '0';
+      thank.appendChild(msg);
+
+      // copy visual styles from form
+      const formStyle = window.getComputedStyle(formEl);
+      if (formStyle.backgroundColor) thank.style.background = formStyle.backgroundColor;
+      if (formStyle.border) thank.style.border = formStyle.border;
+      if (formStyle.borderRadius) thank.style.borderRadius = formStyle.borderRadius;
+      if (formStyle.boxShadow) thank.style.boxShadow = formStyle.boxShadow;
+      thank.style.paddingTop = formStyle.paddingTop;
+      thank.style.paddingRight = formStyle.paddingRight;
+      thank.style.paddingBottom = formStyle.paddingBottom;
+      thank.style.paddingLeft = formStyle.paddingLeft;
+      thank.style.boxSizing = 'border-box';
+      thank.style.display = formStyle.display || 'block';
+      thank.style.width = formStyle.width && formStyle.width !== 'auto' ? formStyle.width : '100%';
+
+      if (refStyle) {
+        thank.style.fontFamily = refStyle.fontFamily;
+        thank.style.fontSize = refStyle.fontSize;
+        thank.style.lineHeight = refStyle.lineHeight;
+        thank.style.fontWeight = refStyle.fontWeight;
+        thank.style.margin = refStyle.margin;
+        thank.style.textAlign = refStyle.textAlign;
+      }
+
+      container.replaceChild(thank, formEl);
+      formEl.reset();
+
+    } catch (err) {
+      console.error('Send error:', err);
+
+      // Mailto fallback: open user's email client with a prefilled message
+      try {
+        const subject = `Inquiry from ${data.name || 'website'}`;
+        const bodyLines = [
+          `Name: ${data.name || ''}`,
+          `Email: ${data.email || ''}`,
+          `Company: ${data.company || ''}`,
+          `Inquiry type: ${data.inquiry_type || ''}`,
+          `Product: ${data.product || ''}`,
+          `Preferred date: ${data.date || ''}`,
+          `Quantity: ${data.quantity || ''}`,
+          '',
+          data.message || ''
+        ];
+
+        feedbackMessage('Could not send via server — opening your email client as a fallback.', 'crimson');
+
+        const mailto = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+        window.location.href = mailto;
+      } catch (mailtoErr) {
+        console.error('Fallback mailto error:', mailtoErr);
+        feedbackMessage('There was an error sending your message. Please try again later.', 'crimson');
+      }
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = 'Send inquiry';
+      }
+    }
+  });
+        </script>
       </div>
     </section>
-  </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>© <span id="year"></span> The Story Garden — Plant venue & studio</p>
+      <p>© <span id="year"></span> The Story Garden — Grow your Story.</p>
     </div>
   </footer>
 
   <script>
     // small niceties
     document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <script>
+    (function initEdenCarousel() {
+      const carousel = document.getElementById('eden-carousel');
+      if (!carousel) return;
+
+      const track = carousel.querySelector('.eden-carousel-track');
+      const slides = carousel.querySelectorAll('.eden-carousel-slide');
+      const dots = carousel.querySelectorAll('.eden-dot');
+      const prevBtn = carousel.querySelector('.eden-carousel-prev');
+      const nextBtn = carousel.querySelector('.eden-carousel-next');
+
+      let index = 0;
+
+      function goTo(i) {
+        index = (i + slides.length) % slides.length;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((d, di) => d.classList.toggle('active', di === index));
+
+        carousel.querySelectorAll('video').forEach((v, vi) => {
+          if (vi === index) {
+            v.play().catch(() => {});
+          } else {
+            v.pause();
+          }
+        });
+      }
+
+      prevBtn.addEventListener('click', () => goTo(index - 1));
+      nextBtn.addEventListener('click', () => goTo(index + 1));
+      dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+      goTo(0);
+    })();
   </script>
 </body>
 </html>

@@ -1,0 +1,8 @@
+BloomingColorsLOGO.jpg
+
+# Mac system files
+.DS_Store
+
+# Stripe downloads: not used by the site, never commit
+stripe
+stripe-java-30.0.0.zip
