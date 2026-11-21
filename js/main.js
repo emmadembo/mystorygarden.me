@@ -27,39 +27,97 @@ function applyMotionPreference() {
 applyMotionPreference();
 reduceMotion.addEventListener?.('change', applyMotionPreference);
 
-// ---- Click a system video to watch it full screen ----
-function isFullscreen() {
-  return Boolean(document.fullscreenElement || document.webkitFullscreenElement);
-}
+// ---- Full-screen video player ----
+// Clicking a system video opens it in our own player, which covers the whole screen on
+// every device. Where the browser allows true full screen (computers, Android, iPad) we
+// also use that, so the browser's toolbars disappear too.
+(function initVideoPlayer() {
+  const player = document.getElementById('video-player');
+  if (!player) return;
+  const inner = player.querySelector('.player-inner');
+  const playerVideo = player.querySelector('.player-video');
+  const title = player.querySelector('.player-title');
+  const closeBtn = player.querySelector('.player-close');
+  const supportsDialog = typeof player.showModal === 'function';
 
-document.querySelectorAll('button.video-frame').forEach((frame) => {
-  const video = frame.querySelector('video');
-  if (!video) return;
+  let cardVideo = null;     // the looping video in the card that was clicked
+  let opener = null;        // the card button, so focus can return to it
+  let wasFullscreen = false;
 
-  frame.addEventListener('click', () => {
-    if (isFullscreen()) return; // clicks on the player's own controls
+  const fullscreenElement = () => document.fullscreenElement || document.webkitFullscreenElement;
 
-    video.currentTime = 0;      // start from the beginning
-    video.controls = true;      // show play/pause and the timeline
-    video.play().catch(() => {});
+  function enterFullscreen() {
+    try {
+      const result = inner.requestFullscreen ? inner.requestFullscreen()
+        : inner.webkitRequestFullscreen ? inner.webkitRequestFullscreen()
+        : null;
+      if (result && result.catch) result.catch(() => {}); // not allowed here: the overlay still fills the screen
+    } catch (_) { /* same as above */ }
+  }
 
-    if (video.requestFullscreen) {
-      video.requestFullscreen().catch(() => { video.controls = false; });
-    } else if (video.webkitRequestFullscreen) {
-      video.webkitRequestFullscreen();          // older Safari on Mac
-    } else if (video.webkitEnterFullscreen) {
-      video.webkitEnterFullscreen();            // iPhone
+  function open(frame) {
+    opener = frame;
+    cardVideo = frame.querySelector('video');
+    if (cardVideo) cardVideo.pause();
+
+    title.textContent = frame.dataset.title || '';
+    playerVideo.poster = cardVideo ? cardVideo.poster : '';
+    playerVideo.src = cardVideo ? (cardVideo.currentSrc || cardVideo.src) : '';
+
+    if (supportsDialog) player.showModal();
+    else player.setAttribute('open', '');
+    document.documentElement.classList.add('player-open');
+
+    playerVideo.play().catch(() => {});  // starts from the beginning
+    enterFullscreen();
+    closeBtn.focus();
+  }
+
+  function cleanUp() {
+    playerVideo.pause();
+    playerVideo.removeAttribute('src');  // stop downloading
+    playerVideo.load();
+    document.documentElement.classList.remove('player-open');
+    if (cardVideo && !reduceMotion.matches) cardVideo.play().catch(() => {});
+    if (opener) opener.focus();
+    cardVideo = opener = null;
+  }
+
+  function close() {
+    if (!player.hasAttribute('open')) return;
+    if (fullscreenElement()) {
+      const exit = document.exitFullscreen || document.webkitExitFullscreen;
+      try { const r = exit && exit.call(document); if (r && r.catch) r.catch(() => {}); } catch (_) {}
     }
+    if (supportsDialog) {
+      player.close();   // fires 'close', which runs cleanUp
+    } else {
+      player.removeAttribute('open');
+      cleanUp();
+    }
+  }
+
+  document.querySelectorAll('button.video-frame').forEach((frame) => {
+    frame.addEventListener('click', () => open(frame));
   });
 
-  // Back in the card: hide the controls and return to the quiet loop
-  const onExit = () => {
-    if (isFullscreen()) return;
-    video.controls = false;
-    if (reduceMotion.matches) video.pause();
-    else video.play().catch(() => {});
+  closeBtn.addEventListener('click', close);
+  player.addEventListener('close', cleanUp);
+  // Esc key (dialog-supporting browsers send 'cancel'; older ones need the keydown)
+  player.addEventListener('cancel', (e) => { e.preventDefault(); close(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !supportsDialog) close();
+  });
+
+  // Leaving true full screen (Esc or the browser's own button) closes the player in one step
+  const onFullscreenChange = () => {
+    if (fullscreenElement()) {
+      wasFullscreen = true;
+    } else if (wasFullscreen) {
+      wasFullscreen = false;
+      close();
+    }
   };
-  video.addEventListener('fullscreenchange', onExit);
-  video.addEventListener('webkitfullscreenchange', onExit);
-  video.addEventListener('webkitendfullscreen', onExit); // iPhone
-});
+  document.addEventListener('fullscreenchange', onFullscreenChange);
+  document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+})();

@@ -68,6 +68,10 @@ h1, h2, h3, p { margin: 0; }
   padding-bottom: 3px; transition: background-size .5s ease;
 }
 .ulink:hover { background-size: 100% 1px; }
+/* Small text links: invisible padding makes the tap area 44px tall; the underline stays under the text */
+.main-nav .ulink, .footer-bar .ulink, .card-meta .ulink, .small-caps.ulink {
+  display: inline-block; padding-block: 15px; background-position: 0 calc(100% - 13px);
+}
 .link-arrow {
   display: inline-flex; align-items: center; gap: 10px; min-height: 44px;
   font-size: 13px; letter-spacing: .16em; text-transform: uppercase; font-weight: 400;
@@ -141,7 +145,8 @@ h1, h2, h3, p { margin: 0; }
 .row-label > .statement, .row-label > .body-cols { flex: 999 1 560px; min-width: 0; }
 .body-cols { display: flex; flex-wrap: wrap; gap: 32px 64px; }
 .body-cols > div { flex: 1 1 280px; }
-.body-cols p + p, .body-cols p + a { margin-top: 20px; display: inline-block; }
+.body-cols p + p { margin-top: 20px; display: inline-block; }
+.body-cols p + a { margin-top: 5px; }
 .photo-pair { display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; }
 .photo { flex: 1 1 340px; height: 520px; border-radius: 4px; background: var(--photo); }
 .photo-offset { flex: 1.4 1 420px; height: 440px; margin-top: 120px; background: #D9D1C2; }
@@ -158,20 +163,54 @@ h1, h2, h3, p { margin: 0; }
 .systems-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); gap: 40px 32px; }
 .system-card { display: flex; flex-direction: column; gap: 22px; }
 .video-frame { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: 4px; background: #D8D4CC; }
-.video-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-/* The video cards are buttons (click = full screen), so clear the default button look */
+.video-frame video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Older browsers without aspect-ratio: keep the 16:9 box with the padding trick */
+@supports not (aspect-ratio: 16 / 9) {
+  .video-frame { height: 0; padding-top: 56.25%; }
+}
+/* The video cards are buttons (click = open the player), so clear the default button look */
 button.video-frame { width: 100%; padding: 0; border: 0; font: inherit; color: inherit; cursor: pointer; text-align: left; }
-/* In full screen, show the whole video instead of cropping it */
-.video-frame video:fullscreen { object-fit: contain; background: #000; }
-.video-frame video:-webkit-full-screen { object-fit: contain; background: #000; }
 /* Small round play button, bottom-left, so visitors know the video opens */
 .play-hint {
   position: absolute; left: 16px; bottom: 16px;
-  display: grid; place-items: center; width: 48px; height: 48px; padding-left: 3px;
+  display: flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; padding-left: 3px;
   border-radius: 50%; background: rgba(42, 41, 37, .72); color: var(--on-dark);
   transition: background-color .4s, transform .6s var(--ease);
 }
-.video-frame:hover .play-hint { background: var(--accent); transform: scale(1.06); }
+
+/* ---------- Full-screen video player ---------- */
+dialog:not([open]) { display: none; }   /* for browsers that don't know <dialog> */
+.player {
+  position: fixed; top: 0; left: 0; z-index: 100;
+  width: 100%; height: 100%; height: 100dvh;   /* dvh = the visible screen on phones */
+  max-width: none; max-height: none; margin: 0; padding: 0; border: 0;
+  background: #000; color: var(--on-dark); overflow: hidden;
+}
+.player::backdrop { background: #000; }
+.player-inner { display: flex; flex-direction: column; width: 100%; height: 100%; background: #000; }
+.player-inner:fullscreen { width: 100%; height: 100%; }
+.player-inner:-webkit-full-screen { width: 100%; height: 100%; }
+/* Top bar sits above the video, so the close button never covers the video's own controls */
+.player-bar {
+  flex: none; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: max(10px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 10px max(20px, env(safe-area-inset-left));
+}
+.player-title { font-family: var(--serif); font-weight: 300; font-size: 20px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.player-close {
+  flex: none; display: flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; padding: 0; border-radius: 50%;
+  border: 1px solid rgba(237, 233, 225, .4); background: transparent; color: var(--on-dark);
+  cursor: pointer; transition: background-color .3s, color .3s;
+}
+.player-close:hover { background: var(--on-dark); color: var(--dark); }
+.player-video {
+  flex: 1 1 0; min-height: 0; width: 100%; display: block;
+  object-fit: contain; background: #000;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+/* Stop the page behind from scrolling while the player is open */
+html.player-open, html.player-open body { overflow: hidden; }
 .pill {
   position: absolute; top: 16px; right: 16px;
   font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 400;
@@ -186,7 +225,7 @@ button.video-frame { width: 100%; padding: 0; border: 0; font: inherit; color: i
 .card-title-row h3 { font-size: 36px; font-weight: 300; }
 .price { font-size: 15px; color: #C9C2B5; }
 .card-meta {
-  display: flex; justify-content: space-between; gap: 16px;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
   font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 400; color: var(--on-dark-muted);
 }
 .card-meta a { color: var(--on-dark); }
@@ -269,11 +308,11 @@ textarea.field { resize: vertical; }
 .footer-inner { padding-block: clamp(72px, 9vw, 128px) 40px; display: flex; flex-direction: column; gap: 72px; }
 .footer-big { font-size: clamp(56px, 9.6vw, 148px); line-height: .9; letter-spacing: -.02em; }
 .footer-bar {
-  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px;
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 24px;
   padding-top: 28px; border-top: 1px solid rgba(237, 233, 225, .2);
   font-size: 12px; letter-spacing: .18em; text-transform: uppercase; font-weight: 400;
 }
-.footer-bar nav { display: flex; flex-wrap: wrap; gap: 32px; }
+.footer-bar nav { display: flex; flex-wrap: wrap; gap: 0 32px; }
 .muted { color: var(--on-dark-muted); }
 
 /* =========================================================
@@ -296,24 +335,40 @@ textarea.field { resize: vertical; }
 .js .reveal { opacity: 0; transform: translateY(32px); transition: opacity 1.1s var(--ease), transform 1.1s var(--ease); }
 .js .reveal.is-visible { opacity: 1; transform: none; }
 
-/* Gentle zoom on hover */
+/* Gentle zoom on hover — only on devices with a mouse/trackpad, so photos
+   don't get stuck zoomed in after a tap on phones and tablets */
 .zoom { overflow: hidden; }
 .zoom > .zi { transition: transform 1.4s var(--ease); }
-.zoom:hover > .zi { transform: scale(1.045); }
+@media (hover: hover) {
+  .zoom:hover > .zi { transform: scale(1.045); }
+  .video-frame:hover .play-hint { background: var(--accent); transform: scale(1.06); }
+}
 
 /* Respect visitors who turn motion off */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .load, .drift, .marquee-track, .biz[open] .field-row { animation: none; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
-  .zoom > .zi { transition: none; }
-  .zoom:hover > .zi { transform: none; }
+  .zoom > .zi, .play-hint { transition: none; }
+  .zoom:hover > .zi, .video-frame:hover .play-hint { transform: none; }
+}
+
+/* Older browsers without aspect-ratio: keep the shop photo square */
+@supports not (aspect-ratio: 1 / 1) {
+  .shop-media { position: relative; height: 0; padding-top: 100%; }
+  .shop-media img { position: absolute; top: 0; left: 0; }
 }
 
 /* ---------- Small screens ---------- */
 @media (max-width: 640px) {
-  .header-inner { justify-content: center; }
-  .main-nav { gap: 18px; }
+  /* Header stacks: logo on top, links centered below (and wrap on very narrow phones) */
+  html { scroll-padding-top: 128px; }
+  .header-inner { justify-content: center; gap: 6px 24px; padding-block: 10px; min-height: 0; }
+  .logo { font-size: 24px; }
+  .main-nav { flex-wrap: wrap; justify-content: center; gap: 4px 16px; letter-spacing: .14em; }
+  .main-nav .btn-small { padding: 10px 16px; letter-spacing: .14em; }
+  .row-label > .spacer { display: none; }
+  .photo, .photo-offset { min-width: 0; }
   .photo { height: 380px; }
   .photo-offset { height: 340px; margin-top: 0; }
   .card-title-row h3 { font-size: 30px; }

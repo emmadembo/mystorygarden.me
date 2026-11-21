@@ -104,7 +104,7 @@
 
         <div class="systems-grid">
           <article class="system-card reveal">
-            <button type="button" class="video-frame zoom" aria-label="Play The Eden System video full screen">
+            <button type="button" class="video-frame zoom" data-title="The Eden System" aria-label="Play The Eden System video">
               <video class="zi" src="media/eden.mp4" poster="media/eden-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
               <span class="pill pill-accent">Pre-order</span>
               <span class="play-hint" aria-hidden="true"><svg width="14" height="16" viewBox="0 0 14 16"><path d="M1 1l12 7-12 7z" fill="currentColor"/></svg></span>
@@ -120,7 +120,7 @@
           </article>
 
           <article class="system-card reveal">
-            <button type="button" class="video-frame zoom" aria-label="Play The Arjuna System video full screen">
+            <button type="button" class="video-frame zoom" data-title="The Arjuna System" aria-label="Play The Arjuna System video">
               <video class="zi" src="media/arjuna.mp4" poster="media/arjuna-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
               <span class="pill pill-dark">Coming soon</span>
               <span class="play-hint" aria-hidden="true"><svg width="14" height="16" viewBox="0 0 14 16"><path d="M1 1l12 7-12 7z" fill="currentColor"/></svg></span>
@@ -152,7 +152,6 @@
           <dl class="specs">
             <dt>Growing</dt><dd>Hydroponic</dd>
             <dt>In the box</dt><dd>12 parts</dd>
-            <dt>Ships</dt><dd>[Ship date]</dd>
           </dl>
           <!-- Stripe buy button (its look is set in the Stripe Dashboard). To use an
                on-brand button instead, swap this for:
@@ -239,6 +238,19 @@
       </div>
     </div>
   </footer>
+
+  <!-- ============ FULL-SCREEN VIDEO PLAYER (opened by js/main.js) ============ -->
+  <dialog class="player" id="video-player" aria-label="Video player">
+    <div class="player-inner">
+      <div class="player-bar">
+        <p class="player-title"></p>
+        <button type="button" class="player-close" aria-label="Close video">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.4"><path d="M2 2l12 12M14 2L2 14"/></svg>
+        </button>
+      </div>
+      <video class="player-video" controls playsinline preload="none"></video>
+    </div>
+  </dialog>
 
 </body>
 </html>
