@@ -170,14 +170,6 @@ h1, h2, h3, p { margin: 0; }
 }
 /* The video cards are buttons (click = open the player), so clear the default button look */
 button.video-frame { width: 100%; padding: 0; border: 0; font: inherit; color: inherit; cursor: pointer; text-align: left; }
-/* Small round play button, bottom-left, so visitors know the video opens */
-.play-hint {
-  position: absolute; left: 16px; bottom: 16px;
-  display: flex; align-items: center; justify-content: center;
-  width: 48px; height: 48px; padding-left: 3px;
-  border-radius: 50%; background: rgba(42, 41, 37, .72); color: var(--on-dark);
-  transition: background-color .4s, transform .6s var(--ease);
-}
 
 /* ---------- Full-screen video player ---------- */
 dialog:not([open]) { display: none; }   /* for browsers that don't know <dialog> */
@@ -338,7 +330,6 @@ textarea.field { resize: vertical; }
 .zoom > .zi { transition: transform 1.4s var(--ease); }
 @media (hover: hover) {
   .zoom:hover > .zi { transform: scale(1.045); }
-  .video-frame:hover .play-hint { background: var(--accent); transform: scale(1.06); }
 }
 
 /* Respect visitors who turn motion off */
@@ -346,8 +337,8 @@ textarea.field { resize: vertical; }
   html { scroll-behavior: auto; }
   .load, .drift, .marquee-track, .biz[open] .field-row { animation: none; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
-  .zoom > .zi, .play-hint { transition: none; }
-  .zoom:hover > .zi, .video-frame:hover .play-hint { transform: none; }
+  .zoom > .zi { transition: none; }
+  .zoom:hover > .zi { transform: none; }
 }
 
 /* Older browsers without aspect-ratio: keep the shop photo square */
