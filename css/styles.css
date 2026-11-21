@@ -243,9 +243,6 @@ html.player-open, html.player-open body { overflow: hidden; }
 .specs dt, .specs dd { margin: 0; padding: 14px 0; border-bottom: 1px solid var(--line); }
 .specs dt { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
 .specs dd { font-size: 15px; }
-/* Stripe draws its own button inside this box; min-height stops the page jumping while it loads */
-.shop-buy { min-height: 52px; }
-.shop-buy stripe-buy-button { display: block; }
 
 /* ---------- Contact ---------- */
 .contact { display: flex; flex-wrap: wrap; gap: 56px clamp(40px, 7vw, 120px); }
