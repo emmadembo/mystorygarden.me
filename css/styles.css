@@ -160,7 +160,17 @@ h1, h2, h3, p { margin: 0; }
 .systems-head { display: flex; flex-wrap: wrap; gap: 24px 64px; align-items: flex-end; justify-content: space-between; margin-bottom: 64px; }
 .systems-head .label { margin-bottom: 20px; }
 .systems-intro { max-width: 380px; font-size: 16px; line-height: 1.7; color: #C9C2B5; }
-.systems-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); gap: 40px 32px; }
+.systems-grid { display: grid; grid-template-columns: 1fr; gap: 40px 32px; }
+/* Tablets: two across; an odd last card spans the full width so it isn't left alone */
+@media (min-width: 700px) {
+  .systems-grid { grid-template-columns: repeat(2, 1fr); }
+  .systems-grid > .system-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+/* Wide screens: three across */
+@media (min-width: 1100px) {
+  .systems-grid { grid-template-columns: repeat(3, 1fr); }
+  .systems-grid > .system-card:last-child:nth-child(odd) { grid-column: auto; }
+}
 .system-card { display: flex; flex-direction: column; gap: 22px; }
 .video-frame { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: 4px; background: #D8D4CC; }
 .video-frame video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -212,7 +222,7 @@ html.player-open, html.player-open body { overflow: hidden; }
   display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
   padding-bottom: 18px; border-bottom: 1px solid rgba(237, 233, 225, .2);
 }
-.card-title-row h3 { font-size: 36px; font-weight: 300; }
+.card-title-row h3 { font-size: clamp(28px, 2.5vw, 36px); font-weight: 300; }
 .price { font-size: 15px; color: #C9C2B5; }
 .card-meta {
   display: flex; justify-content: space-between; align-items: center; gap: 16px;
