@@ -180,27 +180,25 @@ dialog:not([open]) { display: none; }   /* for browsers that don't know <dialog>
   background: #000; color: var(--on-dark); overflow: hidden;
 }
 .player::backdrop { background: #000; }
-.player-inner { display: flex; flex-direction: column; width: 100%; height: 100%; background: #000; }
+.player-inner { position: relative; width: 100%; height: 100%; background: #000; }
 .player-inner:fullscreen { width: 100%; height: 100%; }
 .player-inner:-webkit-full-screen { width: 100%; height: 100%; }
-/* Top bar sits above the video, so the close button never covers the video's own controls */
-.player-bar {
-  flex: none; display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  padding: max(10px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 10px max(20px, env(safe-area-inset-left));
-}
-.player-title { font-family: var(--serif); font-weight: 300; font-size: 20px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.player-close {
-  flex: none; display: flex; align-items: center; justify-content: center;
-  width: 48px; height: 48px; padding: 0; border-radius: 50%;
-  border: 1px solid rgba(237, 233, 225, .4); background: transparent; color: var(--on-dark);
-  cursor: pointer; transition: background-color .3s, color .3s;
-}
-.player-close:hover { background: var(--on-dark); color: var(--dark); }
+/* The video fills the whole screen */
 .player-video {
-  flex: 1 1 0; min-height: 0; width: 100%; display: block;
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block;
   object-fit: contain; background: #000;
   padding-bottom: env(safe-area-inset-bottom);
 }
+/* Small close button floating in the top-right corner (kept clear of the phone's notch) */
+.player-close {
+  position: absolute; z-index: 2;
+  top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right));
+  display: flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; padding: 0; border-radius: 50%;
+  border: 1px solid rgba(237, 233, 225, .35); background: rgba(0, 0, 0, .45); color: var(--on-dark);
+  cursor: pointer; transition: background-color .3s, color .3s;
+}
+.player-close:hover { background: var(--on-dark); color: var(--dark); }
 /* Stop the page behind from scrolling while the player is open */
 html.player-open, html.player-open body { overflow: hidden; }
 .pill {

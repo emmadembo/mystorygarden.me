@@ -36,7 +36,6 @@ reduceMotion.addEventListener?.('change', applyMotionPreference);
   if (!player) return;
   const inner = player.querySelector('.player-inner');
   const playerVideo = player.querySelector('.player-video');
-  const title = player.querySelector('.player-title');
   const closeBtn = player.querySelector('.player-close');
   const supportsDialog = typeof player.showModal === 'function';
 
@@ -60,7 +59,8 @@ reduceMotion.addEventListener?.('change', applyMotionPreference);
     cardVideo = frame.querySelector('video');
     if (cardVideo) cardVideo.pause();
 
-    title.textContent = frame.dataset.title || '';
+    // No visible title; screen readers still hear which video is playing
+    player.setAttribute('aria-label', (frame.dataset.title || 'Video') + ' video player');
     playerVideo.poster = cardVideo ? cardVideo.poster : '';
     playerVideo.src = cardVideo ? (cardVideo.currentSrc || cardVideo.src) : '';
 
