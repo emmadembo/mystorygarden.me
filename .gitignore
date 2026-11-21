@@ -10,3 +10,8 @@ stripe-java-30.0.0.zip
 # Redesign reference build (temporary, deleted after the redesign is merged)
 redesign-reference/
 redesign-reference.zip
+
+# Local files not used by the website (kept on this Mac only)
+RENDERcombined.stl
+\# Code Citations.md
+untitled.html
