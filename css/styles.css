@@ -290,6 +290,8 @@ textarea.field { resize: vertical; }
 .btn-arrow { align-self: flex-start; min-height: 52px; padding-inline: 32px; }
 .form-status { font-size: 15px; color: var(--accent); min-height: 1.4em; }
 .form-status.is-error { color: #8A3B2E; }
+.form-note { margin-top: -20px; font-size: 14px; line-height: 1.6; color: var(--muted); }
+.form-note a { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 
 /* ---------- Footer ---------- */
 .footer-inner { padding-block: clamp(72px, 9vw, 128px) 40px; display: flex; flex-direction: column; gap: 72px; }

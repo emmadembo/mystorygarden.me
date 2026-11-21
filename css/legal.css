@@ -1,0 +1,44 @@
+/* Legal pages (privacy, shipping, refunds): a calm, readable single column.
+   Loaded after styles.css, so it reuses the same colors and fonts. */
+
+.legal {
+  max-width: 820px;
+  padding-block: clamp(64px, 8vw, 120px);
+}
+.legal .label { margin: 0 0 20px; }
+.legal .title-xl { margin: 0; }
+.legal-date {
+  margin: 20px 0 0;
+  font-size: 13px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--muted); font-weight: 400;
+}
+
+.legal-body {
+  margin-top: clamp(40px, 5vw, 64px);
+  padding-top: clamp(32px, 4vw, 48px);
+  border-top: 1px solid var(--line);
+  font-size: 17px; line-height: 1.75; color: var(--body);
+}
+.legal-body h2 {
+  margin: 56px 0 16px;
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(28px, 3vw, 36px); line-height: 1.15; color: var(--ink);
+}
+.legal-body h3 {
+  margin: 28px 0 8px;
+  font-family: var(--sans); font-weight: 400;
+  font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
+}
+.legal-body p { margin: 0 0 16px; }
+.legal-body ul { margin: 0 0 16px; padding-left: 1.2em; }
+.legal-body li { margin-bottom: 10px; }
+.legal-body li::marker { color: var(--muted); }
+.legal-body strong { font-weight: 500; color: var(--ink); }
+.legal-body a {
+  color: var(--ink);
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;
+}
+.legal-body a:hover { color: var(--accent); }
+
+/* Footer on legal pages has no big headline, so tighten it */
+.legal + footer .footer-inner { padding-block: 40px; }
