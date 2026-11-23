@@ -68,6 +68,13 @@ h1, h2, h3, p { margin: 0; }
   padding-bottom: 3px; transition: background-size .5s ease;
 }
 .ulink:hover { background-size: 100% 1px; }
+/* Always-underlined text link with an arrow (e.g. "Shop now", "Back to home") */
+.text-link {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 44px;
+  font-size: 13px; letter-spacing: .16em; text-transform: uppercase; font-weight: 400;
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px;
+  transition: color .3s;
+}
 /* Small text links: invisible padding makes the tap area 44px tall; the underline stays under the text */
 .main-nav .ulink, .footer-bar .ulink, .card-meta .ulink {
   display: inline-block; padding-block: 15px; background-position: 0 calc(100% - 13px);
@@ -235,6 +242,9 @@ html.player-open, html.player-open body { overflow: hidden; }
 .shop-head .label { margin-bottom: 20px; }
 .shop-intro { max-width: 380px; font-size: 16px; line-height: 1.7; color: var(--body); }
 .shop-head.is-teaser { margin-bottom: 0; }
+.shop-page { padding-top: clamp(28px, 4vw, 48px); }
+.shop-page .back-home { margin-bottom: clamp(32px, 5vw, 64px); }
+.shop-page .back-home svg { transform: rotate(180deg); }
 .shop-head-side { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
 /* The Shop page (shop.html): footer has no big headline, so tighten it */
 .shop-page + footer .footer-inner { padding-block: 40px; }
