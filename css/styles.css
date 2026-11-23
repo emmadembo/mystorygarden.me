@@ -69,7 +69,7 @@ h1, h2, h3, p { margin: 0; }
 }
 .ulink:hover { background-size: 100% 1px; }
 /* Small text links: invisible padding makes the tap area 44px tall; the underline stays under the text */
-.main-nav .ulink, .footer-bar .ulink, .card-meta .ulink, .small-caps.ulink {
+.main-nav .ulink, .footer-bar .ulink, .card-meta .ulink {
   display: inline-block; padding-block: 15px; background-position: 0 calc(100% - 13px);
 }
 .link-arrow {
@@ -146,7 +146,6 @@ h1, h2, h3, p { margin: 0; }
 .body-cols { display: flex; flex-wrap: wrap; gap: 32px 64px; }
 .body-cols > div { flex: 1 1 280px; }
 .body-cols p + p { margin-top: 20px; display: inline-block; }
-.body-cols p + a { margin-top: 5px; }
 .photo-pair { display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; }
 .photo { flex: 1 1 340px; height: 520px; border-radius: 4px; background: var(--photo); }
 .photo-offset { flex: 1.4 1 420px; height: 440px; margin-top: 120px; background: #D9D1C2; }
