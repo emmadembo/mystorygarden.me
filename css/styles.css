@@ -126,7 +126,7 @@ h1, h2, h3, p { margin: 0; }
   background: var(--photo);
 }
 /* object-position keeps the vase and plants in view inside the arch */
-.hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 65% 70%; }
+.hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
 
 /* ---------- Marquee ---------- */
 .marquee { border-block: 1px solid var(--line); overflow: hidden; padding: 26px 0; }
