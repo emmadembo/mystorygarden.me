@@ -8,12 +8,15 @@ It's a plain static site (HTML, CSS and JavaScript), with no build step.
 ```
 index.html        the home page
 privacy.html      privacy policy
+systems/          one page per product (eden.html, arjuna.html, raya.html)
 favicon.svg       browser-tab icon
 css/styles.css    all styling (colors and fonts are at the top, under :root)
 css/legal.css     extra styling for legal pages (privacy, etc.)
+css/product.css   extra styling for the product pages
 js/main.js        footer year, wholesale auto-open, reduced-motion video pause
 js/reveal.js      fade-up animations on scroll
 js/form.js        sends the contact form to Formspree
+js/carousel.js    photo/video carousel on the product pages
 images/           photos and logo (lowercase-hyphenated names, no spaces)
 media/            videos and their poster images
 ```

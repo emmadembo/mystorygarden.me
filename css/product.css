@@ -1,0 +1,98 @@
+/* Product pages (systems/*.html): media carousel on the left, details on the right.
+   Loaded after styles.css, so it reuses the same colors, fonts, buttons and spec list. */
+
+.product-page { padding-block: clamp(28px, 4vw, 48px) clamp(80px, 10vw, 140px); }
+
+.back-link {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 44px;
+  font-size: 12px; letter-spacing: .2em; text-transform: uppercase; font-weight: 400; color: var(--muted);
+}
+.back-link svg { transform: rotate(180deg); }
+
+.product {
+  margin-top: clamp(16px, 3vw, 32px);
+  display: grid; grid-template-columns: 1fr; gap: 40px;
+}
+@media (min-width: 900px) {
+  .product { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(48px, 6vw, 96px); align-items: start; }
+  /* Keep the pictures in view while reading the details */
+  .product-media { position: sticky; top: 108px; }
+}
+
+/* ---------- Carousel ---------- */
+.carousel { position: relative; }
+.carousel-track {
+  display: flex; overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory; scrollbar-width: none;
+  border-radius: 4px; background: var(--photo);
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+.carousel-track:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.slide {
+  position: relative; flex: 0 0 100%; margin: 0;
+  aspect-ratio: 1 / 1; scroll-snap-align: start; scroll-snap-stop: always;
+  background: var(--photo);
+}
+@supports not (aspect-ratio: 1 / 1) { .slide { height: 0; padding-top: 100%; } }
+/* Show every picture whole (nothing cropped), centred on the stone tone */
+.slide img, .slide video {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: contain; display: block;
+}
+.slide-video video { background: #000; }
+
+.carousel-btn {
+  position: absolute; top: 50%; z-index: 2; transform: translateY(-50%);
+  display: flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; padding: 0; border-radius: 50%;
+  border: 1px solid var(--line); background: rgba(242, 240, 235, .85); color: var(--ink);
+  cursor: pointer; transition: background-color .3s, color .3s, opacity .3s;
+}
+.carousel-btn.prev { left: 14px; }
+.carousel-btn.prev svg { transform: rotate(180deg); }
+.carousel-btn.next { right: 14px; }
+.carousel-btn:disabled { opacity: 0; pointer-events: none; }
+@media (hover: hover) { .carousel-btn:hover { background: var(--ink); color: var(--ground); } }
+/* Keep the arrows clear of the video's own controls */
+.carousel.on-video .carousel-btn { top: 40%; }
+
+.carousel-count {
+  position: absolute; right: 14px; bottom: 14px; z-index: 2;
+  padding: 6px 12px; border-radius: 999px; background: rgba(242, 240, 235, .85);
+  font-size: 11px; letter-spacing: .16em; color: var(--muted);
+}
+.carousel.on-video .carousel-count { display: none; }
+
+/* ---------- Thumbnails ---------- */
+.thumbs { display: flex; gap: 10px; margin-top: 14px; overflow-x: auto; padding: 3px; scrollbar-width: none; }
+.thumbs::-webkit-scrollbar { display: none; }
+.thumb {
+  position: relative; flex: 0 0 auto; width: 76px; height: 76px; padding: 0;
+  border: 1px solid transparent; border-radius: 4px; background: var(--photo);
+  cursor: pointer; overflow: hidden; opacity: .65; transition: opacity .3s, border-color .3s;
+}
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumb.is-active { opacity: 1; border-color: var(--ink); }
+@media (hover: hover) { .thumb:hover { opacity: 1; } }
+.thumb-tag {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 3px 0;
+  background: rgba(31, 30, 27, .7); color: var(--on-dark);
+  font-size: 10px; letter-spacing: .14em; text-transform: uppercase; text-align: center;
+}
+
+/* ---------- Details ---------- */
+.product-info { display: flex; flex-direction: column; gap: 26px; min-width: 0; }
+.product-info .title-xl { margin: 0; }
+.product-price { font-family: var(--serif); font-size: 28px; font-weight: 300; }
+.product-price.is-soon { font-size: 22px; font-style: italic; color: var(--muted); }
+.product-info .body { max-width: 520px; }
+.product-info .body + .body { margin-top: -10px; }
+.specs-title { margin-bottom: -14px; }
+.product-note { font-size: 14px; color: var(--muted); margin-top: -12px; }
+
+/* Footer on product pages has no big headline, so tighten it */
+.product-page + footer .footer-inner { padding-block: 40px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-btn, .thumb { transition: none; }
+}
