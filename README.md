@@ -7,6 +7,7 @@ It's a plain static site (HTML, CSS and JavaScript), with no build step.
 
 ```
 index.html        the home page
+shop.html         shop page: a card for each product
 privacy.html      privacy policy
 systems/          one page per product (eden.html, arjuna.html, raya.html)
 favicon.svg       browser-tab icon
